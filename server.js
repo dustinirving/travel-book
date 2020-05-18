@@ -6,7 +6,7 @@
 // Dependencies
 // =============================================================
 const express = require('express')
-const exphbs = require('express-handlebars')
+// const exphbs = require('express-handlebars')
 
 // Requiring our models for syncing to the MySQL database
 // Remember: This syntax imports the `db` object exported from the
@@ -18,8 +18,8 @@ const db = require('./models')
 const app = express()
 
 // Set up the Express app to use the Handlebars template engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+// app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+// app.set('view engine', 'handlebars')
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
@@ -31,9 +31,8 @@ app.use(express.static('./public'))
 
 // Routes
 // =============================================================
-app.get('/', (req, res) => {
-  res.render('index', { appName: 'Project 2' })
-})
+app.use(require('./controllers/html-routes.js'))
+app.use('api', require('./controllers/api-routes.js'))
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({ force: true }).then(() => {
