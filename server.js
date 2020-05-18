@@ -15,14 +15,13 @@ const db = require('./models')
 // Sets up the Express App
 // =============================================================
 const app = express()
-
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Allow Express to automatically serve static resource like the
 // HTML, CSS and JavaScript for the frontend client application.
-app.use(express.static('./public'))
+app.use(express.static('./views'))
 
 // Routes
 // =============================================================
