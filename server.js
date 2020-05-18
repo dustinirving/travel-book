@@ -6,7 +6,6 @@
 // Dependencies
 // =============================================================
 const express = require('express')
-const exphbs = require('express-handlebars')
 
 // Requiring our models for syncing to the MySQL database
 // Remember: This syntax imports the `db` object exported from the
