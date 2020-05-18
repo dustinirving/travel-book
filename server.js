@@ -18,8 +18,8 @@ const db = require('./models')
 const app = express()
 
 // Set up the Express app to use the Handlebars template engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+// app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+// app.set('view engine', 'handlebars')
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
@@ -27,7 +27,7 @@ app.use(express.json())
 
 // Allow Express to automatically serve static resource like the
 // HTML, CSS and JavaScript for the frontend client application.
-app.use(express.static('./public'))
+app.use(express.static('./views'))
 
 // Routes
 // =============================================================
