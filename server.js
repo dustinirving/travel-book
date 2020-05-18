@@ -6,7 +6,6 @@
 // Dependencies
 // =============================================================
 const express = require('express')
-// const exphbs = require('express-handlebars')
 
 // Requiring our models for syncing to the MySQL database
 // Remember: This syntax imports the `db` object exported from the
@@ -16,10 +15,6 @@ const db = require('./models')
 // Sets up the Express App
 // =============================================================
 const app = express()
-
-// Set up the Express app to use the Handlebars template engine
-// app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-// app.set('view engine', 'handlebars')
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
