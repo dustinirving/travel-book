@@ -4,6 +4,62 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
   </head>
-  <body></body>
+  <body>
+    <div class="ui doubling two column grid container">
+      <div class="row">
+        <div class="centered column">
+          <h1 class="ui aligned center header">Travel Book</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="centered column">
+          <div class="ui segment">
+            <form class="ui form">
+              <h2 class="ui aligned center header">Login</h2>
+              <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" />
+                <!-- <div class="ui pointing label">
+                  Username must contain at least 6 characters
+                </div> -->
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input type="text" name="password" placeholder="Password" />
+                <!-- <div class="ui pointing label">
+                  Password must contain at least 6 characters
+                </div> -->
+              </div>
+              <!-- Add error into class (ui error message) -->
+              <div class="ui error message">
+                <div class="header">Action Forbidden</div>
+                <p>
+                  You can only sign up for an account once with a given e-mail
+                  address.
+                </p>
+              </div>
+              <div class="ui centered grid padded">
+                <button class="ui button" type="submit">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="centered center aligned column">
+          <div class="ui">
+            Don't have an account?
+            <a href="sign-up.html">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
