@@ -5,7 +5,7 @@ const express = require('express')
 const router = express.Router()
 
 // Import the Post model using object destructuring assignment
-const { Post, User } = require('../models')
+const { User } = require('../models')
 
 // Routes
 // =============================================================
@@ -30,7 +30,5 @@ router.post('/users', function (req, res) {
       res.status(500).json({ errors: [err] })
     })
 })
-
-
 
 module.exports = router
