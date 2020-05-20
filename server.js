@@ -25,7 +25,7 @@ app.use(express.static('views'))
 
 // Routes
 // =============================================================
-app.use('api', require('./controllers/users'))
+app.use('/api', require('./controllers/users'))
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync().then(() => {
