@@ -3,15 +3,15 @@
 
 const express = require('express')
 const router = express.Router()
-
-// Import the Post model using object destructuring assignment
 const { User } = require('../models')
+const passport = require('../config/passport')
+const isAuthenticated = require('../config/middleware/isAuthenticated')
 
 // Routes
 // =============================================================
 
 // User api routes
-router.get('/users', function (req, res) {
+router.get('/users', isAuthenticated, function (req, res) {
   User.findAll()
     .then(usersArray => {
       res.status(200).json({ data: usersArray })
@@ -21,6 +21,25 @@ router.get('/users', function (req, res) {
       res.status(500).json({ errors: [err] })
     })
 })
+
+// !REFACTOR TO CATCH & HANDLE ERRORS
+router.post('/api/login', passport.authenticate('local'), function (req, res) {
+  res.status(200).json(req.user)
+})
+
+router.post('/api/signup', function (req, res) {
+  User.create({
+    username: req.body.username,
+    password: req.body.password
+  })
+    .then(function () {
+      res.redirect(307, '/api/login')
+    })
+    .catch(function (err) {
+      res.status(401).json(err)
+    })
+})
+
 router.post('/users', function (req, res) {
   console.log('New post data received: \n', req.body)
   User.create(req.body)
