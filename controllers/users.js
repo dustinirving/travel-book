@@ -23,9 +23,16 @@ router.get('/users', isAuthenticated, function (req, res) {
 })
 
 // !REFACTOR TO CATCH & HANDLE ERRORS
-router.post('/api/login', passport.authenticate('local'), function (req, res) {
-  res.status(200).json(req.user)
-})
+router.post(
+  '/api/login',
+  passport.authenticate('local', {
+    successRedirect: '/home',
+    failureRedirect: '/api/login'
+  }),
+  function (req, res) {
+    res.status(200).json(req.user)
+  }
+)
 
 router.post('/api/signup', function (req, res) {
   User.create({
