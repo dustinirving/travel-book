@@ -19,23 +19,26 @@
       <div class="row">
         <div class="centered column">
           <div class="ui segment">
-            <form class="ui form">
+            <form class="ui form" id="login-form">
               <h2 class="ui aligned center header">Login</h2>
               <div class="field">
                 <label>Username</label>
-                <input type="text" name="username" placeholder="Username" />
-                <!-- <div class="ui pointing label">
-                  Username must contain at least 6 characters
-                </div> -->
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  id="username"
+                />
               </div>
               <div class="field">
                 <label>Password</label>
-                <input type="text" name="password" placeholder="Password" />
-                <!-- <div class="ui pointing label">
-                  Password must contain at least 6 characters
-                </div> -->
+                <input
+                  type="text"
+                  name="password"
+                  placeholder="Password"
+                  id="password"
+                />
               </div>
-              <!-- Add error into class (ui error message) -->
               <div class="ui error message">
                 <div class="header">Action Forbidden</div>
                 <p>
@@ -61,5 +64,6 @@
         </div>
       </div>
     </div>
+    <script src="./js/login.js"></script>
   </body>
 </html>
