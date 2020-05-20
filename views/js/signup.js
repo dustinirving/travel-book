@@ -79,12 +79,7 @@ const usernameExists = users => {
 const validator = async (username, password, htmlElement, isChecked) => {
   const users = await retrieveUsers()
   const exists = usernameExists(users)
-  if (
-    username.length >= 6 &&
-    password.length >= 6 &&
-    isChecked &&
-    !usernameExists
-  ) {
+  if (username.length >= 6 && password.length >= 6 && isChecked && !exists) {
     const newUser = {
       username: username,
       password: password
@@ -106,13 +101,13 @@ form.addEventListener('submit', event => {
   event.preventDefault()
 
   //   HTML selectors for username and password
-  const username = document.getElementById('username')
-  const password = document.getElementById('password')
+  const username = document.getElementById('username').value.trim()
+  const password = document.getElementById('password').value.trim()
 
   //   HTML element for success or error message
   const message = document.getElementById('message')
-  //   The checkbox is either checked or not
+  //   The checkbox is either checked or not (true or false)
   const isChecked = document.getElementById('checkbox').checked
 
-  validator(username.value, password.value, message, isChecked)
+  validator(username, password, message, isChecked)
 })
