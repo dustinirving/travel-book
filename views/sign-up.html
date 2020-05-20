@@ -19,11 +19,12 @@
       <div class="row">
         <div class="centered column">
           <div class="ui segment">
-            <form class="ui form">
+            <form class="ui form" id="signup-form">
               <h2 class="ui aligned center header">Sign up</h2>
               <div class="field">
                 <label>Username</label>
                 <input
+                  id="username"
                   type="text"
                   name="username"
                   placeholder="Username must contain at least 6 characters"
@@ -35,7 +36,8 @@
               <div class="field">
                 <label>Password</label>
                 <input
-                  type="text"
+                  id="password"
+                  type="password"
                   name="password"
                   placeholder="Password must contain at least 6 characters"
                 />
@@ -45,18 +47,20 @@
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                  <input type="checkbox" tabindex="0" class="hidden" />
-                  <label>I agree to the Terms and Conditions.</label>
+                  <input
+                    id="checkbox"
+                    type="checkbox"
+                    tabindex="0"
+                    class="hidden"
+                    value="checkbox"
+                  />
+                  <label for="checkbox"
+                    >I agree to the Terms and Conditions.</label
+                  >
                 </div>
               </div>
               <!-- Add error into class (ui error message) -->
-              <div class="ui error message">
-                <div class="header">Action Forbidden</div>
-                <p>
-                  You can only sign up for an account once with a given e-mail
-                  address.
-                </p>
-              </div>
+              <div class="" id="message"></div>
               <div class="ui centered grid padded">
                 <button class="ui button" type="submit">
                   Sign up
@@ -75,5 +79,6 @@
         </div>
       </div>
     </div>
+    <script src="./js/signup.js"></script>
   </body>
 </html>
