@@ -23,16 +23,16 @@
     <div class="ui blue container">
       <div class="ui segment padded">
         <h1 class="ui aligned center header">Create a Post</h1>
-        <div class="ui form">
+        <div class="ui form" id="create-post">
           <div class="field">
             <label>Location</label>
-            <input type="text" name="location" placeholder="Location" />
+            <input type="text" name="location" id="location" placeholder="Location" />
           </div>
           <div class="field">
             <label>Travel Experience</label>
             <textarea
               name="travel-experience"
-              id=""
+              id="travel-experience"
               cols="30"
               rows="10"
               placeholder="Write about your travel experience"
@@ -47,5 +47,6 @@
         </div>
       </div>
     </div>
+    <script src="js/createPost.js"></script>
   </body>
 </html>
