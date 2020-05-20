@@ -21,12 +21,13 @@ app.use(express.json())
 
 // Allow Express to automatically serve static resource like the
 // HTML, CSS and JavaScript for the frontend client application.
-app.use(express.static('./views'))
+app.use(express.static('views'))
 
 // Routes
 // =============================================================
-app.use(require('./controllers/html-routes.js'))
-app.use('api', require('./controllers/api-routes.js'))
+// app.use(require('./controllers/html-routes')) //    Currently empty
+app.use('api', require('./controllers/api-routes'))
+
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({ force: true }).then(() => {

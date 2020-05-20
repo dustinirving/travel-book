@@ -1,7 +1,7 @@
 {
-  "name": "fsf-cu-project2",
+  "name": "travel-book",
   "version": "0.0.1",
-  "description": "Instructor demo for Project 2 of the Carleton University Coding Bootcamp",
+  "description": "A social media platform for travellers to create and share travel experiences",
   "main": "server.js",
   "scripts": {
     "test": "npm run lint",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rlmckenney/FSF-CU-Project2.git"
+    "url": "https://github.com/dustinirving/travel-book"
   },
   "keywords": [
     "node",
@@ -26,12 +26,12 @@
     "mysql",
     "heroku"
   ],
-  "author": "Robert McKenney <robert@mckenney.ca>",
+  "author": "Larry Agbana, Dustin Irving, Solomon Eke",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rlmckenney/FSF-CU-Project2/issues"
+    "url": "https://github.com/dustinirving/travel-book/issues"
   },
-  "homepage": "https://github.com/rlmckenney/FSF-CU-Project2#readme",
+  "homepage": "https://github.com/dustinirving/travel-book#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
