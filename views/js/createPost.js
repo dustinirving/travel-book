@@ -1,4 +1,4 @@
-// 
+//
 
 document.getElementById('create-post').addEventListener('submit', event => {
   event.preventDefault()
@@ -16,11 +16,11 @@ document.getElementById('create-post').addEventListener('submit', event => {
     body: JSON.stringify(newPost)
   }).then(response => {
     // REMOVE CONSOLE LOG DURING PRODUCTION
-      console.log(response)
-      if (response.ok) {
-          // UPGRADE LATER TO SEMANTIC UI MODAL
-          alert('New post created')
-          location.reload()
-      }
+    console.log(response)
+    if (response.ok) {
+      // UPGRADE LATER TO SEMANTIC UI MODAL
+      alert('New post created')
+      location.reload()
+    }
   })
 })
