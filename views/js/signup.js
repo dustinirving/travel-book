@@ -42,19 +42,20 @@ const setDefaultValues = () => {
 }
 
 // Querying the database to get all of the usernames
-const retrieveUsers = () => {
-  fetch('api/users', {
+const retrieveUsers = async () => {
+  const data = await fetch('/api/users', {
     method: 'GET',
     headers: { 'Content-type': 'application/json' }
   })
     .then(response => response.json())
     .then(({ data }) => data)
     .catch(err => console.log(err))
+  return data
 }
 
 // Post request
-const addUser = newUser => {
-  fetch('/api/users', {
+const addUser = async newUser => {
+  const data = await fetch('/api/users', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newUser)
@@ -62,15 +63,16 @@ const addUser = newUser => {
     .then(response => response.json())
     .then(({ data }) => data)
     .catch(err => console.log(err))
+  return data
 }
 
 // Checks to see if the username exists
 const usernameExists = users => {
-  const usernames = users.username
   let exists = false
   const newUsername = document.getElementById('username').value.trim()
-  for (const username of usernames) {
-    if (newUsername === username) exists = true
+  for (const user of users) {
+    console.log(user)
+    if (newUsername === user.username) exists = true
   }
   return exists
 }
@@ -78,7 +80,9 @@ const usernameExists = users => {
 // Checks the length of the username and password
 const validator = async (username, password, htmlElement, isChecked) => {
   const users = await retrieveUsers()
+  console.log(users)
   const exists = usernameExists(users)
+
   if (username.length >= 6 && password.length >= 6 && isChecked && !exists) {
     const newUser = {
       username: username,
