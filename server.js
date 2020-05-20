@@ -1,15 +1,8 @@
-// ****************************************************************************
-// Server.js
-// This file is the initial starting point for the Node/Express server.
-// ****************************************************************************
-
-// Dependencies
+// Import Dependencies
 // =============================================================
 const express = require('express')
-
-// Requiring our models for syncing to the MySQL database
-// Remember: This syntax imports the `db` object exported from the
-// `./models/index.js` module.
+const session = require('express-session')
+const passport = require('./config/passport')
 const db = require('./models')
 
 // Sets up the Express App
@@ -20,8 +13,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Allow Express to automatically serve static resource like the
-// HTML, CSS and JavaScript for the frontend client application.
 app.use(express.static('views'))
+
+// Authentication middleware
+// We need to use sessions to keep track of our user's login status
+app.use(
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Routes
 // =============================================================
