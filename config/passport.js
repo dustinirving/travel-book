@@ -7,20 +7,20 @@ passport.use(
   new LocalStrategy(async function (username, password, done) {
     let dbUser
     try {
-        dbUser = await db.User.findOne({ username })
-        if (!dbUser) {
-            return done(null, false, {message: 'Username does not exist'})
-        }
-    } catch (err) {
-        return done(err)
-    }
-    
-      let correctPassword = await dbUser.validPassword(password) 
-      if (!correctPassword) {
-          return done(null, false, {message: 'Incorrect password!'})
+      dbUser = await db.User.findOne({ username })
+      if (!dbUser) {
+        return done(null, false, { message: 'Username does not exist' })
       }
+    } catch (err) {
+      return done(err)
+    }
 
-      return done(null, dbUser) 
+    const correctPassword = await dbUser.validPassword(password)
+    if (!correctPassword) {
+      return done(null, false, { message: 'Incorrect password!' })
+    }
+
+    return done(null, dbUser)
   })
 )
 
@@ -34,9 +34,9 @@ passport.serializeUser(function (user, done) {
 })
 
 passport.deserializeUser(function (id, done) {
-    db.User.findByPk(id, function (err, user) {
-        done(err, user);
-    });
+  db.User.findByPk(id, function (err, user) {
+    done(err, user)
+  })
 })
 
 module.exports = passport
