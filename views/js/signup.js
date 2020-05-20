@@ -55,7 +55,7 @@ const retrieveUsers = async () => {
 
 // Post request
 const addUser = async newUser => {
-  const data = await fetch('/api/users', {
+  const data = await fetch('/api/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newUser)
