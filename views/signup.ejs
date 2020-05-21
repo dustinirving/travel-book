@@ -1,0 +1,62 @@
+<div class="ui doubling two column grid container">
+  <div class="row">
+    <div class="centered column">
+      <h1 class="ui aligned center header">Travel Book</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="centered column">
+      <div class="ui segment">
+        <form class="ui form" id="signup-form" action="/signup" method="POST">
+          <h2 class="ui aligned center header">Sign up</h2>
+          <div class="field">
+            <label>Username</label>
+            <input
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Username must contain at least 6 characters"
+              value="<%= typeof username != 'undefined' ? username : '' %>"
+            />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Password must contain at least 6 characters"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+          </div>
+          <% if(typeof errors != 'undefined') { %>
+          <div class="ui red message">
+            <% errors.forEach(function(error) { %>
+            <p><%= error.msg %></p>
+            <% }); %>
+          </div>
+          <% }%> <% if(typeof success != 'undefined') { %>
+          <div class="ui green message">
+            <% success.forEach(function(item) { %>
+            <p><%= item.msg %></p>
+            <% }); %>
+          </div>
+          <% }%> <% if (success_msg != '') { %> <%= success_msg %> <% } %>
+          <div class="ui centered grid padded">
+            <button class="ui button" type="submit">
+              Sign up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="centered center aligned column">
+      <div class="ui">
+        Already have an account?
+        <a href="/login">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
