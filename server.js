@@ -5,6 +5,7 @@ const session = require('express-session')
 const passport = require('./config/passport')
 const db = require('./models')
 const flash = require('connect-flash')
+const exphbs = require('express-handlebars')
 
 // Sets up the Express App
 // =============================================================
@@ -16,7 +17,18 @@ app.use(express.json())
 // Allow Express to automatically serve static resource like the
 app.use(express.static('views'))
 
+// Use handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
 app.use(flash())
+// app.use((req, res, next) => {
+//   res.locals.sucess_msg = req.flash('success_msg')
+//   res.locals.error_msg = req.flash('error_msg')
+//   res.locals.error_msg = req.flash('error')
+//   next()
+// })
+
 // Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(
@@ -29,6 +41,7 @@ app.use(passport.session())
 // =============================================================
 app.use('/', require('./controllers/users'))
 app.use('/', require('./controllers/posts'))
+app.use('/', require('./controllers/handlebars'))
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync().then(() => {

@@ -1,0 +1,60 @@
+<div class="ui doubling two column grid container">
+    <div class="row">
+        <div class="centered column">
+            <h1 class="ui aligned center header">Travel Book</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="centered column">
+            <div class="ui segment">
+                <form class="ui form" id="signup-form" action="/signup" method="POST">
+                    <h2 class="ui aligned center header">Sign up</h2>
+                    <div class="field">
+                        <label>Username</label>
+                        <input id="username" type="text" name="username"
+                            placeholder="Username must contain at least 6 characters" />
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input id="password" type="password" name="password"
+                            placeholder="Password must contain at least 6 characters" />
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input id="checkbox" type="checkbox" tabindex="0" class="hidden" value="checkbox"
+                                name=value />
+                            <label for="checkbox">I agree to the Terms and Conditions.</label>
+                        </div>
+                    </div>
+                    <!-- Add error into class (ui error message) -->
+                    {{#if errors}}
+                    <div class="ui red message">
+                        {{#each errors}}
+                        <p>{{msg}}</p>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                    {{#if msg}}
+                    <div class="ui green message">
+                        <p>{{msg}}</p>
+                    </div>
+                    {{/if}}
+
+                    <div class="ui centered grid padded">
+                        <button class="ui button" type="submit">
+                            Sign up
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="centered center aligned column">
+            <div class="ui">
+                Already have an account?
+                <a href="/login">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
