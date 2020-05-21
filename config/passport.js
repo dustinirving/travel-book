@@ -4,11 +4,7 @@ const LocalStrategy = Strategy
 const db = require('../models')
 
 passport.use(
-  new LocalStrategy(async function (
-    username,
-    password,
-    done
-  ) {
+  new LocalStrategy(async function (username, password, done) {
     let dbUser
     try {
       dbUser = await db.User.findOne({

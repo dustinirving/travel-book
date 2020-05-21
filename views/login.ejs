@@ -1,30 +1,61 @@
-<%- include("partials/header") %>
-<div class="row">
-  <h1 style="text-align: center">Login</h1>
-  <div style="width: 30%; margin: 25px auto;">
-    <form action="/login" method="post">
-      <div class="form-group">
-        <input
-          class="form-control"
-          type="text"
-          name="username"
-          placeholder="username"
-        />
+<div class="ui doubling two column grid container">
+  <div class="row">
+    <div class="centered column">
+      <h1 class="ui aligned center header">Travel Book</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="centered column">
+      <div class="ui segment">
+        <form class="ui form" id="login-form" action="/login" method="POST">
+          <h2 class="ui aligned center header">Login</h2>
+          <div class="field">
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              id="username"
+              value="<%= typeof username != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              id="password"
+              value="<%= typeof password != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <div class="ui error message">
+            <div class="header">Action Forbidden</div>
+            <p>
+              You can only sign up for an account once with a given e-mail
+              address.
+            </p>
+          </div>
+          <!-- <div class="ui error message">
+                        {{!-- {{#each errors}}
+                        {{error}}
+                        {{/each errors}} --}}
+                    </div> -->
+          <div class="ui centered grid padded">
+            <button class="ui button" type="submit">
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <input
-          class="form-control"
-          type="password"
-          name="password"
-          placeholder="password"
-        />
+    </div>
+  </div>
+  <div class="row">
+    <div class="centered center aligned column">
+      <div class="ui">
+        Don't have an account?
+        <a href="/signup">Sign up</a>
       </div>
-      <div class="form-group">
-        <button class="btn btn-lg btn-primary btn-block">Login</button>
-      </div>
-    </form>
-    <a href="/">Go Home</a>
+    </div>
   </div>
 </div>
-<%- include("partials/footer") %>
-
