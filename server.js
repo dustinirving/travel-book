@@ -5,7 +5,7 @@ const session = require('express-session')
 const passport = require('./config/passport')
 const db = require('./models')
 const flash = require('connect-flash')
-const exphbs = require('express-handlebars')
+const expressLayouts = require('express-ejs-layouts')
 
 // Sets up the Express App
 // =============================================================
@@ -18,22 +18,24 @@ app.use(express.json())
 app.use(express.static('views'))
 
 // Use handlebars
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
-
-app.use(flash())
-// app.use((req, res, next) => {
-//   res.locals.sucess_msg = req.flash('success_msg')
-//   res.locals.error_msg = req.flash('error_msg')
-//   res.locals.error_msg = req.flash('error')
-//   next()
-// })
+app.use(expressLayouts)
+app.set('view engine', 'ejs')
 
 // Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
 )
+
+// Connects flash
+app.use(flash())
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.error_msg = req.flash('error_msg')
+  res.locals.error = req.flash('error')
+  next()
+})
+
 app.use(passport.initialize())
 app.use(passport.session())
 
