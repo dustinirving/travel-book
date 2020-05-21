@@ -41,7 +41,7 @@ app.use(passport.session())
 // =============================================================
 app.use('/', require('./controllers/users'))
 app.use('/', require('./controllers/posts'))
-app.use('/', require('./controllers/handlebars'))
+
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync().then(() => {
