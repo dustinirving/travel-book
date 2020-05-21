@@ -2,8 +2,7 @@ const db = require('../models')
 const router = require('express').Router()
 const passport = require('passport')
 
-
-//root route //
+// root route //
 router.get('/', function (req, res) {
   res.render('landing')
 })
@@ -13,12 +12,12 @@ router.get('/signup', function (req, res) {
   res.render('signup')
 })
 
-//show login form
+// show login form
 router.get('/login', function (req, res) {
   res.render('login')
 })
 
-//execute user sign up
+// execute user sign up
 router.post('/signup', async function (req, res) {
 //   console.log(req.body)
   const newUser = await db.User.create({
@@ -35,6 +34,5 @@ router.post('/login', (req, res, next) =>
     failureFlash: true
   })(req, res, next)
 )
-
 
 module.exports = router

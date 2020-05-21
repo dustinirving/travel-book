@@ -42,7 +42,6 @@ app.use(passport.session())
 app.use('/', require('./controllers/users'))
 app.use('/', require('./controllers/posts'))
 
-
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync().then(() => {
   const PORT = process.env.PORT || 3000
