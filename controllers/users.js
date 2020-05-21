@@ -23,28 +23,38 @@ router.get('/users', isAuthenticated, function (req, res) {
 })
 
 // !REFACTOR TO CATCH & HANDLE ERRORS
+// router.post('api/login', passport.authenticate('local'), function (req, res) {
+//   // res.redirect('/users/' + req.user.username)
+//   res.status(200).json(req.user.username)
+//   console.log(req.user)
+// })
+
 router.post(
   '/api/login',
   passport.authenticate('local', {
-    successRedirect: '/home',
-    failureRedirect: '/api/login'
-  }),
-  function (req, res) {
-    res.status(200).json(req.user)
-  }
+    successRedirect: '/',
+    failureRedirect: '/users',
+    failureFlash: true
+  })
 )
+// router.post(
+//   '/api/login',
+//   passport.authenticate('local', function (req, res, err, user, info) {
+//     if (err) return res.status(500).send()
+//     if (!user) return res.status(400).json({ error: info.message })
+//     req.logIn(user, function (err) {
+//       if (err) return next(err)
+//       return res.status(200).json(info.message)
+//     })
+//   })(req, res, next)
+// )
 
-router.post('/api/signup', function (req, res) {
-  User.create({
+router.post('/api/signup', async function (req, res) {
+  const newUser = await User.create({
     username: req.body.username,
     password: req.body.password
   })
-    .then(function () {
-      res.redirect(307, '/api/login')
-    })
-    .catch(function (err) {
-      res.status(401).json(err)
-    })
+  res.status(201).json({ data: newUser })
 })
 
 router.post('/users', function (req, res) {
