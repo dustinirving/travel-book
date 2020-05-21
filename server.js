@@ -4,6 +4,7 @@ const express = require('express')
 const session = require('express-session')
 const passport = require('./config/passport')
 const db = require('./models')
+const flash = require('connect-flash')
 
 // Sets up the Express App
 // =============================================================
@@ -15,6 +16,7 @@ app.use(express.json())
 // Allow Express to automatically serve static resource like the
 app.use(express.static('views'))
 
+app.use(flash())
 // Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(

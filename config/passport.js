@@ -4,12 +4,23 @@ const LocalStrategy = Strategy
 const db = require('../models')
 
 passport.use(
-  new LocalStrategy(async function (username, password, done) {
+  new LocalStrategy(async function (
+    username,
+    password,
+    done
+  ) {
     let dbUser
     try {
-      dbUser = await db.User.findOne({ username })
+      dbUser = await db.User.findOne({
+        where: {
+          username: username
+        }
+      })
+      // console.log(dbUser)
       if (!dbUser) {
-        return done(null, false, { message: 'Username does not exist' })
+        return done(null, false, {
+          message: 'User does not exist!'
+        })
       }
     } catch (err) {
       return done(err)
