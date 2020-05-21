@@ -4,19 +4,23 @@
 const express = require('express')
 const router = express.Router()
 const { User } = require('../models')
-const passport = require('../config/passport')
+// const passport = require('../config/passport')
 // const isAuthenticated = require('../config/middleware/isAuthenticated')
 
 // Routes
 // =============================================================
 
-router.post('/login', (req, res, next) =>
-  passport.authenticate('local', {
-    successRedirect: '/home',
-    failureRedirect: '/login',
-    failureFlash: true
-  })(req, res, next)
+router.get('/login', (req, res) =>
+  res.send('login')
 )
+
+// router.post('/login', (req, res, next) =>
+//   passport.authenticate('local', {
+//     successRedirect: '/home',
+//     failureRedirect: '/login',
+//     failureFlash: true
+//   })(req, res, next)
+// )
 
 // router.post(
 //   '/api/login',
@@ -38,6 +42,9 @@ router.post('/login', (req, res, next) =>
 //   })
 //   res.status(201).json({ data: newUser })
 // })
+
+router.get('/signup', (req, res) => res.send('signup'))
+
 router.post('/signup', async (req, res) => {
   console.log(req.body)
   const { username, password } = req.body
