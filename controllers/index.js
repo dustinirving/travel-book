@@ -37,7 +37,7 @@ router.get('/view', function (req, res) {
 })
 
 router.post('/signup', async (req, res) => {
-  let { username, password, checkbox } = req.body
+  const { username, password, checkbox } = req.body
   const errors = []
   const success = []
   const usernameErr = 'Your username must be at least 6 characters.'
