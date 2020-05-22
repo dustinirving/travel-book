@@ -18,6 +18,24 @@ router.get('/login', function (req, res) {
   res.render('login')
 })
 
+// home posts route //
+router.get('/home', function (req, res) {
+  res.render('home')
+})
+
+// create posts route //
+router.get('/create', function (req, res) {
+  res.render('create')
+})
+// edit posts route //
+router.get('/edit', function (req, res) {
+  res.render('edit')
+})
+// view post route //
+router.get('/view', function (req, res) {
+  res.render('view')
+})
+
 router.post('/signup', async (req, res) => {
   let { username, password, checkbox } = req.body
   const errors = []
@@ -39,7 +57,7 @@ router.post('/signup', async (req, res) => {
 
   // There is an issue
   if (errors.length > 0) {
-    res.render('signup', { errors, username, password })
+    res.render('signup', { errors, username })
   } else {
     await User.create({
       username: username,
@@ -47,9 +65,7 @@ router.post('/signup', async (req, res) => {
     })
 
     success.push({ msg: 'You have successfully registered.' })
-    username = ''
-    password = ''
-    res.status(201).render('signup', { success, username, password })
+    res.status(201).render('signup', { success })
   }
 })
 
@@ -61,7 +77,7 @@ router.post(
     failureFlash: true
   }),
   function (req, res) {
-    req.flash('error', 'Invalid password or username')
+    req.flash('error', 'Invalid password or username.')
   }
 )
 
