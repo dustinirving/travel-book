@@ -18,24 +18,6 @@ router.get('/login', function (req, res) {
   res.render('login')
 })
 
-// home posts route //
-router.get('/home', function (req, res) {
-  res.render('home')
-})
-
-// create posts route //
-router.get('/create', function (req, res) {
-  res.render('create')
-})
-// edit posts route //
-router.get('/edit', function (req, res) {
-  res.render('edit')
-})
-// view post route //
-router.get('/view', function (req, res) {
-  res.render('view')
-})
-
 router.post('/signup', async (req, res) => {
   const { username, password, checkbox } = req.body
   const errors = []
@@ -72,7 +54,7 @@ router.post('/signup', async (req, res) => {
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/posts/post/new',
+    successRedirect: '/posts/home',
     failureRedirect: '/login',
     failureFlash: true
   }),
