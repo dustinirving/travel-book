@@ -36,6 +36,42 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
   }
 })
 
+// UPDATE ROUTE
+router.get('/post/:id/edit', async function (req, res) {
+  console.log(req.params.id)
+  try {
+    // let editPost = await Post.findByPk(req.params.id)
+    // res.status(200).json({ data: editPost })
+    res.render('view')
+  } catch (err) {
+    // console.log(`GET failed \n`, err)
+    res.status(500).json({ errors: [err] })
+    // res.redirect('home')
+  }
+})
+
+// router.get('/posts/:id', function (req, res) {
+//   Post.findByPk(req.params.id)
+//     .then(post => res.status(200).json({ data: post }))
+//     .catch(err => {
+//       console.log(`GET /posts failed \n`, err)
+//       res.status(500).json({ errors: [err] })
+//     })
+//   // JSON:API  https://jsonapi.org/
+// })
+
+//  PUT route for updating posts
+router.put('/post/:id', async function (req, res) {
+  try {
+    const post = await Post.findByPk(req.params.id)
+    await post.update(req.body)
+    res.status(200).json({ data: post })
+  } catch (err) {
+    console.log('GET /posts failed \n', err)
+    res.status(500).json({ errors: [err] })
+  }
+})
+
 //  Get route for retrieving a single post
 // router.get('/posts/:id', function (req, res) {
 //   Post.findByPk(req.params.id)
@@ -51,18 +87,6 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
 //   try {
 //     const post = await Post.findByPk(req.params.id)
 //     await post.destroy()
-//     res.status(200).json({ data: post })
-//   } catch (err) {
-//     console.log('GET /posts failed \n', err)
-//     res.status(500).json({ errors: [err] })
-//   }
-// })
-
-//  PUT route for updating posts
-// router.put('/posts/:id', async function (req, res) {
-//   try {
-//     const post = await Post.findByPk(req.params.id)
-//     await post.update(req.body)
 //     res.status(200).json({ data: post })
 //   } catch (err) {
 //     console.log('GET /posts failed \n', err)
