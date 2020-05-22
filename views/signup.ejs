@@ -29,6 +29,12 @@
               value="<%= typeof password != 'undefined' ? password : '' %>"
             />
           </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="checkbox" value="checkbox" />
+              <label>I agree to the Terms and Conditions</label>
+            </div>
+          </div>
           <% if(typeof errors != 'undefined') { %>
           <div class="ui red message">
             <% errors.forEach(function(error) { %>

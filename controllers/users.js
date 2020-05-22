@@ -24,12 +24,13 @@ router.post(
 
 router.post('/signup', async (req, res) => {
   console.log(req.body)
-  let { username, password } = req.body
+  let { username, password, checkbox } = req.body
   const errors = []
   const success = []
   const usernameErr = 'Your username must be at least 6 characters.'
   const passwordErr = 'Your password must be at least 6 characters.'
   const userExistsErr = 'That username already exists.'
+  const termsErr = 'You must agree to the Terms and Conditions'
 
   const usernameExists = await User.findOne({
     where: {
@@ -39,6 +40,7 @@ router.post('/signup', async (req, res) => {
   if (username.length < 6) errors.push({ msg: usernameErr })
   if (password.length < 6) errors.push({ msg: passwordErr })
   if (usernameExists) errors.push({ msg: userExistsErr })
+  if (!checkbox) errors.push({ msg: termsErr })
 
   // There is an issue
   if (errors.length > 0) {
