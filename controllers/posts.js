@@ -3,7 +3,7 @@ const { Post } = require('../models')
 const isAuthenticated = require('../config/middleware/isAuthenticated')
 
 //  GET route for getting all of the posts
-router.get('/posts/', isAuthenticated, async function (req, res) {
+router.get('/', isAuthenticated, async function (req, res) {
   try {
     const postsArray = await Post.findAll()
     res.status(200).json({ data: postsArray })
