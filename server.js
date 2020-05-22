@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Allow Express to automatically serve static resource like the
-app.use(express.static('views'))
+app.use(express.static('public'))
 
 // Use handlebars
 app.use(expressLayouts)
@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 // Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(
-  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+  session({ secret: 'LSD: Larry Solomon Dustin', resave: true, saveUninitialized: true })
 )
 
 // Connects flash
@@ -39,12 +39,12 @@ app.use(passport.session())
 
 // Routes
 // =============================================================
-app.use('/', require('./controllers/users'))
-app.use('/', require('./controllers/posts'))
-app.use('/', require('./controllers/handlebars'))
+// app.use('/users', require('./controllers/users'))
+// app.use('/posts', require('./controllers/posts'))
+app.use('/', require('./controllers/index'))
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
 })
