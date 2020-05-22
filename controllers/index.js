@@ -36,7 +36,6 @@ router.post('/signup', async (req, res) => {
   if (password.length < 6) errors.push({ msg: passwordErr })
   if (usernameExists) errors.push({ msg: userExistsErr })
 
-  // There is an issue
   if (errors.length > 0) {
     res.render('signup', { errors, username, password })
   } else {
@@ -52,12 +51,13 @@ router.post('/signup', async (req, res) => {
   }
 })
 
-router.post('/login', (req, res, next) =>
+router.post('/login',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/signup',
-    failureFlash: true
-  })(req, res, next)
+    failureRedirect: '/signup'
+  }), function (req, res) {
+    console.log('Im here')
+  }
 )
 
 module.exports = router
