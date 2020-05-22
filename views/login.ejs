@@ -29,18 +29,12 @@
               value="<%= typeof password != 'undefined' ? name : '' %>"
             />
           </div>
-          <div class="ui error message">
-            <div class="header">Action Forbidden</div>
-            <p>
-              You can only sign up for an account once with a given e-mail
-              address.
-            </p>
+
+          <% if (error != '') { %>
+          <div class="ui red message">
+            <%= error[0] %>
           </div>
-          <!-- <div class="ui error message">
-                        {{!-- {{#each errors}}
-                        {{error}}
-                        {{/each errors}} --}}
-                    </div> -->
+          <% } %>
           <div class="ui centered grid padded">
             <button class="ui button" type="submit">
               Login

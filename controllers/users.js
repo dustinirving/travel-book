@@ -10,12 +10,16 @@ const passport = require('../config/passport')
 // Routes
 // =============================================================
 
-router.post('/login', (req, res, next) =>
+router.post(
+  '/login',
   passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/login',
     failureFlash: true
-  })(req, res, next)
+  }),
+  function (req, res) {
+    req.flash('error', 'Invalid password or username')
+  }
 )
 
 router.post('/signup', async (req, res) => {
