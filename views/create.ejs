@@ -2,23 +2,40 @@
 <div class="ui blue container">
   <div class="ui segment padded">
     <h1 class="ui aligned center header">Create a Post</h1>
-    <div class="ui form" id="create-post">
+    <form
+      class="ui form"
+      action="/posts/post/new"
+      method="POST"
+    >
       <div class="field">
         <label>Location</label>
-        <input type="text" name="location" id="location" placeholder="Location" />
+        <input
+          type="text"
+          name="location"
+          placeholder="Location"
+        />
       </div>
       <div class="field">
         <label>Travel Experience</label>
-        <textarea name="travel-experience" id="travel-experience" cols="30" rows="10"
-          placeholder="Write about your travel experience"></textarea>
+        <textarea
+          name="travelExperience"
+          cols="30"
+          rows="10"
+          placeholder="Write about your travel experience"
+        ></textarea>
       </div>
       <div class="field">
         <label>Upload an image</label>
+        <input
+          type="text"
+          name="imageURL"
+          placeholder="Image URL"
+        />
       </div>
       <button class="ui button" type="submit">
         Post
       </button>
-    </div>
+    </form>
   </div>
 </div>
 <%- include ("partials/footer") %>

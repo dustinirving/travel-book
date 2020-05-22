@@ -42,11 +42,11 @@ app.use(passport.session())
 // Routes
 // =============================================================
 // app.use('/users', require('./controllers/users'))
-// app.use('/posts', require('./controllers/posts'))
+app.use('/posts', require('./controllers/posts'))
 app.use('/', require('./controllers/index'))
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
 })
