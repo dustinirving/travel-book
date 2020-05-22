@@ -20,7 +20,12 @@ module.exports = (sequelize, DataTypes) => {
   )
 
   User.associate = function (models) {
-    models.User.hasMany(models.Post)
+    models.User.hasMany(models.Post, {
+      foreignKey: {
+        allowNull: false
+      },
+      onDelete: 'CASCADE'
+    })
   }
 
   // Check if an unhashed password entered by the user can be compared to the hashed password stored in our database

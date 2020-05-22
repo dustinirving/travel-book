@@ -3,6 +3,15 @@ const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {}
 
+  Post.associate = function (models) {
+    Post.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      },
+      onDelete: 'CASCADE'
+    })
+  }
+
   Post.init(
     {
       location: {
@@ -25,15 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       sequelize
     }
   )
-
-  Post.associate = function (models) {
-    Post.belongsTo(models.User, {
-      onDelete: 'CASCADE',
-      foreignKey: {
-        allowNull: false
-      }
-    })
-  }
 
   return Post
 }

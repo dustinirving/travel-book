@@ -2,7 +2,6 @@
 const { User } = require('../models')
 const router = require('express').Router()
 const passport = require('passport')
-// const isAuthenticated = require('../config/middleware/isAuthenticated')
 
 // root route //
 router.get('/', function (req, res) {
@@ -20,7 +19,6 @@ router.get('/login', function (req, res) {
 })
 
 router.post('/signup', async (req, res) => {
-  console.log(req.body)
   let { username, password, checkbox } = req.body
   const errors = []
   const success = []
@@ -58,7 +56,7 @@ router.post('/signup', async (req, res) => {
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/home',
+    successRedirect: '/posts/post/new',
     failureRedirect: '/login',
     failureFlash: true
   }),
