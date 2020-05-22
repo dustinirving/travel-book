@@ -5,7 +5,6 @@ const session = require('express-session')
 const passport = require('./config/passport')
 const db = require('./models')
 const flash = require('connect-flash')
-const expressLayouts = require('express-ejs-layouts')
 
 // Sets up the Express App
 // =============================================================
@@ -18,13 +17,16 @@ app.use(express.json())
 app.use(express.static('public'))
 
 // Use handlebars
-app.use(expressLayouts)
 app.set('view engine', 'ejs')
 
 // Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(
-  session({ secret: 'LSD: Larry Solomon Dustin', resave: true, saveUninitialized: true })
+  session({
+    secret: 'LSD: Larry Solomon Dustin',
+    resave: true,
+    saveUninitialized: true
+  })
 )
 
 // Connects flash

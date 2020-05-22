@@ -19,6 +19,24 @@ router.get('/login', function (req, res) {
   res.render('login')
 })
 
+// home posts route //
+router.get('/home', function (req, res) {
+  res.render('home')
+})
+
+// create posts route //
+router.get('/create', function (req, res) {
+  res.render('create')
+})
+// edit posts route //
+router.get('/edit', function (req, res) {
+  res.render('edit')
+})
+// view post route //
+router.get('/view', function (req, res) {
+  res.render('view')
+})
+
 router.post('/signup', async (req, res) => {
   console.log(req.body)
   const { username, password, checkbox } = req.body
