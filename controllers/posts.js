@@ -13,7 +13,10 @@ router.get('/', isAuthenticated, async function (req, res) {
   }
 })
 
-router.get('/post/new', (req, res) => res.send('I can post'))
+// Get route for getting new post form
+router.get('/post/new', function (req, res) {
+  res.render('create')
+})
 
 router.post('/post/new', isAuthenticated, async (req, res, next) => {
   const data = {}
@@ -21,8 +24,8 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
   data.travelExperience = req.body.travelExperience
   data.imageURL = req.body.imageURL
   data.UserId = req.user.id
-  data.createdAt = req.user.createdAt
-  data.updatedAt = req.user.updatedAt
+  data.createdAt = req.body.createdAt
+  data.updatedAt = req.body.updatedAt
 
   try {
     const post = await Post.create(data)
