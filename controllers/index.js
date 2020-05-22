@@ -1,9 +1,8 @@
-const express = require('express')
-const db = require('../models')
+// const express = require('express')
+const { User } = require('../models')
 const router = require('express').Router()
 const passport = require('passport')
 // const isAuthenticated = require('../config/middleware/isAuthenticated')
-
 
 // root route //
 router.get('/', function (req, res) {
@@ -67,6 +66,5 @@ router.post(
     req.flash('error', 'Invalid password or username')
   }
 )
-
 
 module.exports = router
