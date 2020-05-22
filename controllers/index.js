@@ -21,7 +21,7 @@ router.get('/login', function (req, res) {
 
 router.post('/signup', async (req, res) => {
   console.log(req.body)
-  let { username, password, checkbox } = req.body
+  const { username, password, checkbox } = req.body
   const errors = []
   const success = []
   const usernameErr = 'Your username must be at least 6 characters.'
@@ -41,7 +41,7 @@ router.post('/signup', async (req, res) => {
 
   // There is an issue
   if (errors.length > 0) {
-    res.render('signup', { errors, username, password })
+    res.render('signup', { errors, username })
   } else {
     await User.create({
       username: username,
@@ -49,9 +49,7 @@ router.post('/signup', async (req, res) => {
     })
 
     success.push({ msg: 'You have successfully registered.' })
-    username = ''
-    password = ''
-    res.status(201).render('signup', { success, username, password })
+    res.status(201).render('signup', { success })
   }
 })
 
@@ -63,7 +61,7 @@ router.post(
     failureFlash: true
   }),
   function (req, res) {
-    req.flash('error', 'Invalid password or username')
+    req.flash('error', 'Invalid password or username.')
   }
 )
 
