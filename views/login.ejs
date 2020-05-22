@@ -1,3 +1,4 @@
+<%- include ("partials/header") %>
 <div class="ui doubling two column grid container">
   <div class="row">
     <div class="centered column">
@@ -11,23 +12,13 @@
           <h2 class="ui aligned center header">Login</h2>
           <div class="field">
             <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              id="username"
-              value="<%= typeof username != 'undefined' ? name : '' %>"
-            />
+            <input type="text" name="username" placeholder="Username" id="username"
+              value="<%= typeof username != 'undefined' ? name : '' %>" />
           </div>
           <div class="field">
             <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              id="password"
-              value="<%= typeof password != 'undefined' ? name : '' %>"
-            />
+            <input type="password" name="password" placeholder="Password" id="password"
+              value="<%= typeof password != 'undefined' ? name : '' %>" />
           </div>
 
           <% if (error != '') { %>
@@ -53,3 +44,4 @@
     </div>
   </div>
 </div>
+<%- include ("partials/footer") %>
