@@ -2,18 +2,10 @@
 <div class="ui blue container">
   <div class="ui segment padded">
     <h1 class="ui aligned center header">Create a Post</h1>
-    <form
-      class="ui form"
-      action="/posts/post/new"
-      method="POST"
-    >
+    <form class="ui form" action="/posts/post/new" method="POST">
       <div class="field">
         <label>Location</label>
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-        />
+        <input type="text" name="location" placeholder="Location" />
       </div>
       <div class="field">
         <label>Travel Experience</label>
@@ -26,11 +18,8 @@
       </div>
       <div class="field">
         <label>Upload an image</label>
-        <input
-          type="text"
-          name="imageURL"
-          placeholder="Image URL"
-        />
+        <!-- <input type="text" name="imageURL" placeholder="Image URL" /> -->
+        <input type="file" id="img" name="imageURL" accept="image/*" />
       </div>
       <button class="ui button" type="submit">
         Post
