@@ -1,10 +1,7 @@
 <% postsArray.forEach(function(post) { %>
 <div class="item">
   <div class="ui medium image">
-    <img
-      src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$"
-      alt=""
-    />
+    <img src="<%=post.imageURL%>" alt="" />
   </div>
   <div class="content">
     <h3 class="ui header"><%= post.location %></h3>

@@ -1,3 +1,4 @@
+const path = require('path')
 const router = require('express').Router()
 const { Post, User } = require('../models')
 const isAuthenticated = require('../config/middleware/isAuthenticated')
@@ -20,8 +21,8 @@ router.get('/home', isAuthenticated, async function (req, res) {
         const dataObject = await User.findByPk(item.dataValues.UserId)
         const user = await dataObject.dataValues.username
         let travelExperienceStr = item.dataValues.travelExperience
-        if (travelExperienceStr.length > 20) {
-          travelExperienceStr = travelExperienceStr.slice(0, 20) + '...'
+        if (travelExperienceStr.length > 500) {
+          travelExperienceStr = travelExperienceStr.slice(0, 500) + '...'
         }
         // Creating a new object with desired properties
         const postObject = {
@@ -53,16 +54,26 @@ router.get('/post/new', function (req, res) {
 })
 
 router.post('/post/new', isAuthenticated, async (req, res, next) => {
-  const data = {}
-  data.location = req.body.location
-  data.travelExperience = req.body.travelExperience
-  data.imageURL = req.body.imageURL
-  data.UserId = req.user.id
-  data.createdAt = req.body.createdAt
-  data.updatedAt = req.body.updatedAt
-
+  const data = {
+    location: req.body.location,
+    travelExperience: req.body.travelExperience,
+    UserId: req.user.id
+  }
+  console.log(req.body)
   try {
-    await Post.create(data)
+    const post = await Post.create(data)
+    console.log(req.files)
+    if (req.files && req.files.imageURL) {
+      const image = req.files.imageURL
+      // Prepend the fileName with the User.id to prevent naming collisions
+      // with other users uploading files with the same name.
+      const fileName = `${post.id}_${image.name}`
+      // Move the file from the tmp location to the public folder.
+      await image.mv(path.join(__dirname, '..', 'public', 'images', fileName))
+      // Record the public URL on the User model and store it in the database.
+      post.imageURL = `/images/${fileName}`
+      post.save()
+    }
     res.status(201).redirect('/posts/home')
   } catch (err) {
     res.status(500).json({ errors: [err] })
@@ -72,7 +83,6 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
 
 // UPDATE ROUTE
 router.get('/post/:id/edit', async function (req, res) {
-  console.log(req.params.id)
   try {
     // let editPost = await Post.findByPk(req.params.id)
     // res.status(200).json({ data: editPost })
@@ -90,7 +100,6 @@ router.get('/view/:id', async function (req, res) {
       where: { id: req.params.id },
       include: [User]
     })
-    console.log(req.user.id)
     const postObject = {
       author: post.dataValues.User.username,
       authorId: post.dataValues.UserId,
@@ -99,7 +108,6 @@ router.get('/view/:id', async function (req, res) {
       imageURL: post.dataValues.imageURL,
       userId: req.user.id
     }
-    console.log(postObject)
     res.render('view', postObject)
   } catch (err) {
     // console.log(`GET failed \n`, err)
