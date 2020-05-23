@@ -1,0 +1,35 @@
+<%- include ("partials/header") %> <%- include ("partials/navbar") %>
+<div class="ui grid">
+  <div class="three wide column">
+    <div class="ui vertical fluid tabular menu">
+      <a id="user-bio" class="active item">
+        Bio
+      </a>
+      <a href="#post" id="user-post" class="item">
+        Posts
+      </a>
+      <a href="#recommendations" id="user-recommendations" class="item">
+        Recommendations
+      </a>
+      <a href="#settings" id="user-settings" class="item">
+        Settings
+      </a>
+    </div>
+  </div>
+  <div class="ten wide stretched column">
+    <div id="bio" class="ui segment" style="display:none">
+        <%- include ("partials/bio") %>
+    </div>
+    <div id="post" class="ui segment" style="display:none">
+        <%- include ("partials/myPosts") %>
+    </div>
+    <div id="post" class="ui segment" style="display:none">
+        <%- include ("partials/myPosts") %>
+    </div>
+    <div id="post" class="ui segment" style="display:none">
+        <%- include ("partials/myPosts") %>
+    </div>
+  </div>
+</div>
+
+<%- include ("profiles/profile-Footer") %>
