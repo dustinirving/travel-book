@@ -5,11 +5,10 @@ const isAuthenticated = require('../config/middleware/isAuthenticated')
 //  GET route for getting all of the posts
 router.get('/home', isAuthenticated, async function (req, res) {
   try {
-    const postsData = await Post.findAll()
+    const postsData = await Post.findAll({ order: [['createdAt', 'DESC']] })
+    // const postsData = await Post.findAll({ include: [{ model: User }] })
     // This maps the posts Array to be displayed in the client
-
     const postsArray = []
-
     const start = async () => {
       async function asyncForEach (array, callback) {
         for (let index = 0; index < array.length; index++) {
