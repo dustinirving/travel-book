@@ -1,7 +1,7 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {}
+  class Post extends Model { }
 
   Post.associate = function (models) {
     Post.belongsTo(models.User, {
