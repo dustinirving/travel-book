@@ -25,6 +25,7 @@ router.get('/home', isAuthenticated, async function (req, res) {
         }
         // Creating a new object with desired properties
         const postObject = {
+          id: item.dataValues.id,
           author: user,
           location: item.dataValues.location,
           travelExperience: travelExperienceStr,
@@ -44,11 +45,6 @@ router.get('/home', isAuthenticated, async function (req, res) {
 // edit posts route //
 router.get('/edit', function (req, res) {
   res.render('edit')
-})
-
-// view post route //
-router.get('/view', function (req, res) {
-  res.render('view')
 })
 
 // Get route for getting new post form
@@ -88,15 +84,25 @@ router.get('/post/:id/edit', async function (req, res) {
   }
 })
 
-// router.get('/posts/:id', function (req, res) {
-//   Post.findByPk(req.params.id)
-//     .then(post => res.status(200).json({ data: post }))
-//     .catch(err => {
-//       console.log(`GET /posts failed \n`, err)
-//       res.status(500).json({ errors: [err] })
-//     })
-//   // JSON:API  https://jsonapi.org/
-// })
+router.get('/view/:id', async function (req, res) {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.id },
+      include: [User]
+    })
+    const postObject = {
+      author: post.dataValues.User.username,
+      location: post.dataValues.location,
+      travelExperience: post.dataValues.travelExperience,
+      imageURL: post.dataValues.imageURL
+    }
+    res.render('view', postObject)
+  } catch (err) {
+    // console.log(`GET failed \n`, err)
+    res.status(500).json({ errors: [err] })
+    // res.redirect('home')
+  }
+})
 
 //  PUT route for updating posts
 router.put('/post/:id', async function (req, res) {
