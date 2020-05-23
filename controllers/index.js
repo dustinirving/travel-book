@@ -18,6 +18,12 @@ router.get('/login', function (req, res) {
   res.render('login')
 })
 
+// Route for logging user out
+router.get('/logout', function (req, res) {
+  req.logout()
+  res.redirect('/')
+})
+
 router.post('/signup', async (req, res) => {
   const { username, password, checkbox } = req.body
   const errors = []
