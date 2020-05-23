@@ -90,12 +90,16 @@ router.get('/view/:id', async function (req, res) {
       where: { id: req.params.id },
       include: [User]
     })
+    console.log(req.user.id)
     const postObject = {
       author: post.dataValues.User.username,
+      authorId: post.dataValues.UserId,
       location: post.dataValues.location,
       travelExperience: post.dataValues.travelExperience,
-      imageURL: post.dataValues.imageURL
+      imageURL: post.dataValues.imageURL,
+      userId: req.user.id
     }
+    console.log(postObject)
     res.render('view', postObject)
   } catch (err) {
     // console.log(`GET failed \n`, err)

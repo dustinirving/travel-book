@@ -14,7 +14,9 @@
       </div>
     </div>
   </div>
+  <%if (authorId === userId) { %>
   <form action="/posts/post/edit" method="GET">
     <button class="ui button" type="submit">Edit Post</button>
   </form>
+  <% } %>
 </div>
