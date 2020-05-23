@@ -1,0 +1,20 @@
+<div class="ui segment padded">
+  <h1 class="ui center aligned header"><%= location %></h1>
+  <h4 class="ui center aligned header">By: <%= author %></h4>
+  <div class="ui items">
+    <div class="item">
+      <div class="description">
+        <%= travelExperience %>
+      </div>
+      <div class="ui large image">
+        <img
+          src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+  <form action="/posts/post/edit" method="GET">
+    <button class="ui button" type="submit">Edit Post</button>
+  </form>
+</div>
