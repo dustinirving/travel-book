@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Post } = require('../models')
+const { Post, User } = require('../models')
 const isAuthenticated = require('../config/middleware/isAuthenticated')
 
 //  GET route for getting all of the posts
@@ -7,21 +7,35 @@ router.get('/home', isAuthenticated, async function (req, res) {
   try {
     const postsData = await Post.findAll()
     // This maps the posts Array to be displayed in the client
-    const postsArray = postsData.map((item) => {
-      let travelExperienceStr = item.dataValues.travelExperience
-      if (travelExperienceStr.length > 20) {
-        travelExperienceStr = travelExperienceStr.slice(0, 20) + '...'
+
+    const postsArray = []
+
+    const start = async () => {
+      async function asyncForEach (array, callback) {
+        for (let index = 0; index < array.length; index++) {
+          await callback(array[index], index, array)
+        }
       }
-      // Creating a new object with desired properties
-      const postObject = {
-        author: item.dataValues.UserId,
-        location: item.dataValues.location,
-        travelExperience: travelExperienceStr,
-        imageURL: item.dataValues.imageURL
-      }
-      return postObject
-    })
-    res.render('home', { postsArray })
+
+      await asyncForEach(postsData, async item => {
+        const dataObject = await User.findByPk(item.dataValues.UserId)
+        const user = await dataObject.dataValues.username
+        let travelExperienceStr = item.dataValues.travelExperience
+        if (travelExperienceStr.length > 20) {
+          travelExperienceStr = travelExperienceStr.slice(0, 20) + '...'
+        }
+        // Creating a new object with desired properties
+        const postObject = {
+          author: user,
+          location: item.dataValues.location,
+          travelExperience: travelExperienceStr,
+          imageURL: item.dataValues.imageURL
+        }
+        postsArray.push(postObject)
+      })
+      res.render('home', { postsArray })
+    }
+    start()
   } catch (err) {
     console.log('GET /posts failed \n', err)
     res.status(500).json({ errors: [err] })
@@ -61,6 +75,42 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
   }
 })
 
+// UPDATE ROUTE
+router.get('/post/:id/edit', async function (req, res) {
+  console.log(req.params.id)
+  try {
+    // let editPost = await Post.findByPk(req.params.id)
+    // res.status(200).json({ data: editPost })
+    res.render('view')
+  } catch (err) {
+    // console.log(`GET failed \n`, err)
+    res.status(500).json({ errors: [err] })
+    // res.redirect('home')
+  }
+})
+
+// router.get('/posts/:id', function (req, res) {
+//   Post.findByPk(req.params.id)
+//     .then(post => res.status(200).json({ data: post }))
+//     .catch(err => {
+//       console.log(`GET /posts failed \n`, err)
+//       res.status(500).json({ errors: [err] })
+//     })
+//   // JSON:API  https://jsonapi.org/
+// })
+
+//  PUT route for updating posts
+router.put('/post/:id', async function (req, res) {
+  try {
+    const post = await Post.findByPk(req.params.id)
+    await post.update(req.body)
+    res.status(200).json({ data: post })
+  } catch (err) {
+    console.log('GET /posts failed \n', err)
+    res.status(500).json({ errors: [err] })
+  }
+})
+
 //  Get route for retrieving a single post
 // router.get('/posts/:id', function (req, res) {
 //   Post.findByPk(req.params.id)
@@ -76,18 +126,6 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
 //   try {
 //     const post = await Post.findByPk(req.params.id)
 //     await post.destroy()
-//     res.status(200).json({ data: post })
-//   } catch (err) {
-//     console.log('GET /posts failed \n', err)
-//     res.status(500).json({ errors: [err] })
-//   }
-// })
-
-//  PUT route for updating posts
-// router.put('/posts/:id', async function (req, res) {
-//   try {
-//     const post = await Post.findByPk(req.params.id)
-//     await post.update(req.body)
 //     res.status(200).json({ data: post })
 //   } catch (err) {
 //     console.log('GET /posts failed \n', err)
