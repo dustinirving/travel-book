@@ -118,7 +118,6 @@ router.delete('/view/delete/:id', async function (req, res) {
 router.get('/edit/post/:id', async function (req, res) {
   try {
     const post = await Post.findByPk(req.params.id)
-    console.log(post.dataValues)
     const postObject = {
       id: post.dataValues.id,
       authorId: post.dataValues.UserId,
@@ -144,7 +143,6 @@ router.post('/edit/post/:id', async function (req, res) {
   }
   try {
     const updatedPost = await post.update(data)
-    console.log(req.files)
     if (req.files && req.files.imageURL) {
       const image = req.files.imageURL
       const fileName = `${updatedPost.id}_${image.name}`
