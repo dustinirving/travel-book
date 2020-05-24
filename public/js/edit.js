@@ -14,7 +14,7 @@
 //   }
 //   fetch('/posts/edit/post/' + id, {
 //     method: 'PUT',
-//     headers: { 'Content-Type': 'application/json' },
+//     headers: { 'Content-Type': 'multipart/form-data' },
 //     body: JSON.stringify(post)
 //   })
 //     .then(res => (window.location.href = '/posts/home'))
