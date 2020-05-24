@@ -1,6 +1,19 @@
 <div class="ui segment padded">
   <h1 class="ui center aligned header"><%= location %></h1>
-  <h4 class="ui center aligned header">By: <%= author %></h4>
+  <div class="ui centered grid">
+    <div class="row">
+      <p>By: <%= author %></p>
+    </div>
+    <%if (authorId === userId) { %>
+    <a href="/posts/edit/post/<%=id%>"><button class="ui button">
+        Edit Post
+      </button></a>
+
+    <button postId="<%=id%>" id="delete-btn" class="ui red button">
+      Delete Post
+    </button>
+  </div>
+  <% } %>
   <div class="ui items">
     <div class="item">
       <div class="description">
@@ -11,17 +24,4 @@
       </div>
     </div>
   </div>
-  <%if (authorId === userId) { %>
-
-  <a href="/posts/edit/post/<%=id%>"
-    ><button class="ui button">
-      Edit Post
-    </button></a
-  >
-
-  <button postId="<%=id%>" id="delete-btn" class="ui button">
-    Delete Post
-  </button>
-
-  <% } %>
 </div>

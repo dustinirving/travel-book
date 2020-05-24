@@ -1,12 +1,7 @@
-<%- include ("partials/header") %>
+<%- include ("partials/landing-header") %>
 <div class="ui doubling two column grid container">
   <div class="row">
-    <div class="centered column">
-      <h1 class="ui aligned center header">Travel Book</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="centered column">
+    <div class="centered column" id="login-align">
       <div class="ui segment">
         <form class="ui form" id="login-form" action="/login" method="POST">
           <h2 class="ui aligned center header">Login</h2>
@@ -26,22 +21,26 @@
             <%= error[0] %>
           </div>
           <% } %>
-          <div class="ui centered grid padded">
-            <button class="ui button" type="submit">
-              Login
-            </button>
+          <div class="ui one center aligned column grid">
+            <div class="row">
+              <div class="column">
+                <button class="ui teal button" type="submit">
+                  Login
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                Don't have an account?
+
+                <a href="/signup">Sign up</a>
+              </div>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="centered center aligned column">
-      <div class="ui">
-        Don't have an account?
-        <a href="/signup">Sign up</a>
-      </div>
-    </div>
-  </div>
+
 </div>
-<%- include ("partials/footer") %>
+<%- include ("partials/main-footer") %>
