@@ -13,7 +13,12 @@
   </div>
   <%if (authorId === userId) { %>
 
-  <button postId="<%=id%>" id="edit-btn" class="ui button">Edit Post</button>
+  <a href="/posts/edit/post/<%=id%>"
+    ><button class="ui button">
+      Edit Post
+    </button></a
+  >
+
   <button postId="<%=id%>" id="delete-btn" class="ui button">
     Delete Post
   </button>
