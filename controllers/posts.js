@@ -101,6 +101,7 @@ router.get('/view/:id', async function (req, res) {
       include: [User]
     })
     const postObject = {
+      id: post.dataValues.id,
       author: post.dataValues.User.username,
       authorId: post.dataValues.UserId,
       location: post.dataValues.location,
@@ -116,8 +117,20 @@ router.get('/view/:id', async function (req, res) {
   }
 })
 
+//  DELETE route for deleting posts
+router.delete('/view/delete/:id', async function (req, res) {
+  try {
+    const post = await Post.findByPk(req.params.id)
+    await post.destroy()
+    res.status(200).json(post)
+  } catch (err) {
+    console.log('GET /posts failed \n', err)
+    res.status(500).json({ errors: [err] })
+  }
+})
+
 //  PUT route for updating posts
-router.put('/post/:id', async function (req, res) {
+router.put('/view/post/:id', async function (req, res) {
   try {
     const post = await Post.findByPk(req.params.id)
     await post.update(req.body)
@@ -136,18 +149,6 @@ router.put('/post/:id', async function (req, res) {
 //       console.log('GET /posts failed \n', err)
 //       res.status(500).json({ errors: [err] })
 //     })
-// })
-
-//  DELETE route for deleting posts
-// router.delete('/posts/:id', async function (req, res) {
-//   try {
-//     const post = await Post.findByPk(req.params.id)
-//     await post.destroy()
-//     res.status(200).json({ data: post })
-//   } catch (err) {
-//     console.log('GET /posts failed \n', err)
-//     res.status(500).json({ errors: [err] })
-//   }
 // })
 
 module.exports = router
