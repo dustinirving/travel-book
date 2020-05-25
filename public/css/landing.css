@@ -1,14 +1,53 @@
 body {
-    background-image: url("/backgrounds/landing.png");
-    background-size: cover;
+  background-image: url('/backgrounds/landing.png');
+  background-size: cover;
 }
 
 #landing-align {
-    margin-top: 30vh;
+  margin-top: 20vh;
+  position: absolute;
+  width: 50vw;
+  /* height: 55vh; */
+  left: 40vw;
+  top: 0vh;
+}
+
+#landing-align h1 {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  color: #000000;
+  text-align: left;
+  padding-left: 2rem;
+}
+
+#landing-align p {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  color: #000000;
+  text-align: left;
+  padding-left: 2rem;
+  margin-top: 2.5rem !important;
+}
+
+.value-prop {
+  background: rgba(243, 236, 236, 0.7) !important;
+}
+#landing-align .buttons {
+    margin: 1.5rem;
+}
+#landing-align .btn {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 #login-align {
-    margin-top: 28vh !important;
+  margin-top: 28vh !important;
 }
 #signup-align {
-    margin-top: 22vh !important;
+  margin-top: 22vh !important;
 }
