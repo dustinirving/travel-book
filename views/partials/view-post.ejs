@@ -5,9 +5,11 @@
       <p>By: <%= author %></p>
     </div>
     <%if (authorId === userId) { %>
-    <a href="/posts/edit/post/<%=id%>"><button class="ui button">
+    <a href="/posts/edit/post/<%=id%>"
+      ><button class="ui button">
         Edit Post
-      </button></a>
+      </button></a
+    >
 
     <button postId="<%=id%>" id="delete-btn" class="ui red button">
       Delete Post
