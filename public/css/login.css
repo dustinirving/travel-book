@@ -1,0 +1,13 @@
+body {
+    background-image: url("/backgrounds/login.png");
+}
+
+#landing-align {
+    margin-top: 30vh;
+}
+#login-align {
+    margin-top: 30vh;
+}
+#signup-align {
+    margin-top: 30vh;
+}

@@ -21,8 +21,8 @@ router.get('/home', isAuthenticated, async function (req, res) {
         const dataObject = await User.findByPk(item.dataValues.UserId)
         const user = await dataObject.dataValues.username
         let travelExperienceStr = item.dataValues.travelExperience
-        if (travelExperienceStr.length > 500) {
-          travelExperienceStr = travelExperienceStr.slice(0, 500) + '...'
+        if (travelExperienceStr.length > 975) {
+          travelExperienceStr = travelExperienceStr.slice(0, 975) + '...'
         }
         // Creating a new object with desired properties
         const postObject = {
@@ -136,6 +136,7 @@ router.get('/edit/post/:id', async function (req, res) {
 //  PUT route for updating posts
 router.post('/edit/post/:id', async function (req, res) {
   const post = await Post.findByPk(req.params.id)
+  console.log(req.files)
   const data = {
     location: req.body.location,
     travelExperience: req.body.travelExperience,

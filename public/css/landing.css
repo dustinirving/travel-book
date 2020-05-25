@@ -1,0 +1,14 @@
+body {
+    background-image: url("/backgrounds/landing.png");
+    background-size: cover;
+}
+
+#landing-align {
+    margin-top: 30vh;
+}
+#login-align {
+    margin-top: 28vh !important;
+}
+#signup-align {
+    margin-top: 22vh !important;
+}
