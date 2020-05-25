@@ -14,15 +14,19 @@
     <button postId="<%=id%>" id="delete-btn" class="ui red button">
       Delete Post
     </button>
+    <% } %>
   </div>
-  <% } %>
-  <div class="ui items">
-    <div class="item">
-      <div class="description">
-        <%= travelExperience %>
-      </div>
-      <div class="ui large image">
-        <img src="<%=imageURL%>" alt="Travel Image" />
+  <div class="ui grid">
+    <div class="row">
+      <div class="column">
+        <img
+          class="ui large floated right image"
+          src="<%=imageURL%>"
+          alt="Travel Image"
+        />
+        <div class="description">
+          <%= travelExperience %>
+        </div>
       </div>
     </div>
   </div>
