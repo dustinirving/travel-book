@@ -43,13 +43,8 @@ router.get('/home', isAuthenticated, async function (req, res) {
   }
 })
 
-// edit posts route //
-router.get('/edit', function (req, res) {
-  res.render('edit')
-})
-
 // Get route for getting new post form
-router.get('/post/new', function (req, res) {
+router.get('/post/new', isAuthenticated, function (req, res) {
   res.render('create')
 })
 
@@ -79,7 +74,7 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
   }
 })
 
-router.get('/view/:id', async function (req, res) {
+router.get('/view/:id', isAuthenticated, async function (req, res) {
   try {
     const post = await Post.findOne({
       where: { id: req.params.id },
@@ -103,7 +98,7 @@ router.get('/view/:id', async function (req, res) {
 })
 
 //  DELETE route for deleting posts
-router.delete('/view/delete/:id', async function (req, res) {
+router.delete('/view/delete/:id', isAuthenticated, async function (req, res) {
   try {
     const post = await Post.findByPk(req.params.id)
     await post.destroy()
@@ -115,7 +110,7 @@ router.delete('/view/delete/:id', async function (req, res) {
 })
 
 // UPDATE ROUTE
-router.get('/edit/post/:id', async function (req, res) {
+router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
   try {
     const post = await Post.findByPk(req.params.id)
     const postObject = {
@@ -134,7 +129,7 @@ router.get('/edit/post/:id', async function (req, res) {
   }
 })
 //  PUT route for updating posts
-router.post('/edit/post/:id', async function (req, res) {
+router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
   const post = await Post.findByPk(req.params.id)
   console.log(req.files)
   const data = {
