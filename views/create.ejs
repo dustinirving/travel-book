@@ -1,41 +1,25 @@
-<%- include ("partials/header") %> <%- include ("partials/navbar") %>
+<%- include ("partials/main-header") %> <%- include ("partials/navbar") %>
 <div class="ui blue container">
   <div class="ui segment padded">
     <h1 class="ui aligned center header">Create a Post</h1>
-    <form
-      class="ui form"
-      action="/posts/post/new"
-      method="POST"
-    >
+    <form class="ui form" action="/posts/post/new" method="POST" enctype="multipart/form-data">
       <div class="field">
         <label>Location</label>
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-        />
+        <input type="text" name="location" placeholder="Location" />
       </div>
       <div class="field">
         <label>Travel Experience</label>
-        <textarea
-          name="travelExperience"
-          cols="30"
-          rows="10"
-          placeholder="Write about your travel experience"
-        ></textarea>
+        <textarea name="travelExperience" cols="30" rows="10"
+          placeholder="Write about your travel experience"></textarea>
       </div>
       <div class="field">
         <label>Upload an image</label>
-        <input
-          type="text"
-          name="imageURL"
-          placeholder="Image URL"
-        />
+        <input type="file" id="img" name="imageURL" />
       </div>
-      <button class="ui button" type="submit">
+      <button class="ui teal button" type="submit">
         Post
       </button>
     </form>
   </div>
 </div>
-<%- include ("partials/footer") %>
+<%- include ("partials/main-footer") %>

@@ -1,12 +1,7 @@
-<%- include ("partials/header") %>
+<%- include ("partials/landing-header") %>
 <div class="ui doubling two column grid container">
   <div class="row">
-    <div class="centered column">
-      <h1 class="ui aligned center header">Travel Book</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="centered column">
+    <div class="centered column" id="signup-align">
       <div class="ui segment">
         <form class="ui form" id="signup-form" action="/signup" method="POST">
           <h2 class="ui aligned center header">Sign up</h2>
@@ -23,7 +18,7 @@
           <div class="field">
             <div class="ui checkbox">
               <input type="checkbox" name="checkbox" value="checkbox" />
-              <label>I agree to the Terms and Conditions</label>
+              <label>I agree to the Terms and Conditions.</label>
             </div>
           </div>
           <% if(typeof errors != 'undefined') { %>
@@ -39,22 +34,26 @@
             <% }); %>
           </div>
           <% }%>
-          <div class="ui centered grid padded">
-            <button class="ui button" type="submit">
-              Sign up
-            </button>
+          <div class="ui center aligned one column grid padded">
+            <div class="row">
+              <div class="column">
+                <button class="ui teal button" type="submit">
+                  Sign up
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <div class="ui">
+                  Already have an account?
+                  <a href="/login">Login</a>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="centered center aligned column">
-      <div class="ui">
-        Already have an account?
-        <a href="/login">Login</a>
-      </div>
-    </div>
-  </div>
 </div>
-<%- include ("partials/footer") %>
+<%- include ("partials/main-footer") %>

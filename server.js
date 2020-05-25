@@ -5,6 +5,8 @@ const session = require('express-session')
 const passport = require('./config/passport')
 const db = require('./models')
 const flash = require('connect-flash')
+const path = require('path')
+const fileUpload = require('express-fileupload')
 
 // Sets up the Express App
 // =============================================================
@@ -13,8 +15,16 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+// Middleware for uploading images
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: path.join(__dirname, 'tmp')
+  })
+)
+
 // Allow Express to automatically serve static resource like the
-app.use(express.static('public'))
+app.use(express.static('./public'))
 
 // Use handlebars
 app.set('view engine', 'ejs')
