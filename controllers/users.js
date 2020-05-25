@@ -29,7 +29,7 @@ router.get('/profile', isAuthenticated, async function (req, res) {
       Faker is a package that generates random fake user data.
       - Calling faker.seed ensures the data returned is predictable
     */
-    faker.seed(613)
+    // faker.seed(613)
 
     // Get all user data to be used in profile - a mix of real data from req.user and faker data
     const userBio = {
