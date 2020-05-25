@@ -2,6 +2,7 @@
 const { User } = require('../models')
 const router = require('express').Router()
 const passport = require('passport')
+const iplocate = require('node-iplocate')
 
 // root route //
 router.get('/', function (req, res) {
