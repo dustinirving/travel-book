@@ -7,6 +7,7 @@ const db = require('./models')
 const flash = require('connect-flash')
 const path = require('path')
 const fileUpload = require('express-fileupload')
+const methodOverride = require('method-override')
 
 // Sets up the Express App
 // =============================================================
@@ -14,6 +15,7 @@ const app = express()
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(methodOverride('_method'))
 
 // Middleware for uploading images
 app.use(
@@ -59,7 +61,7 @@ app.get('*', (req, res) => {
 })
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
 })
