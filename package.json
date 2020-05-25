@@ -20,12 +20,7 @@
     "type": "git",
     "url": "https://github.com/dustinirving/travel-book"
   },
-  "keywords": [
-    "node",
-    "express",
-    "mysql",
-    "heroku"
-  ],
+  "keywords": ["node", "express", "mysql", "heroku"],
   "author": "Larry Agbana, Dustin Irving, Solomon Eke",
   "license": "MIT",
   "bugs": {
@@ -39,7 +34,6 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "express-session": "^1.17.1",
-    "multer": "^1.4.2",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
