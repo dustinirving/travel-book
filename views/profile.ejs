@@ -1,0 +1,36 @@
+<%- include ("partials/main-header") %> <%- include ("partials/navbar") %>
+<div class="ui grid">
+  <div class="three wide column">
+    <div class="ui vertical fluid tabular menu" id="btns-DIV">
+      <a id="user-bio" class="active item btns">
+        Bio
+      </a>
+      <a id="user-post" class="item btns">
+        Posts
+      </a>
+      <a id="user-recommendations" class="item btns">
+        Recommendations
+      </a>
+      <a id="user-settings" class="item btns">
+        Settings
+      </a>
+    </div>
+  </div>
+  <div class="ten wide stretched column">
+    <h2>Welcome back <%= userBio.firstName.toUpperCase() %> <%= userBio.lastName.toUpperCase() %></h2>
+    <div id="bio" class="ui segment">
+      <%- include ("profiles/bio") %>
+    </div>
+    <div id="post" class="ui segment" style="display:none">
+      <%- include ("profiles/posts") %>
+    </div>
+    <div id="recommendations" class="ui segment" style="display:none">
+      <%- include ("profiles/recommendations") %>
+    </div>
+    <div id="settings" class="ui segment" style="display:none">
+      <%- include ("profiles/settings") %>
+    </div>
+  </div>
+</div>
+
+<%- include ("profiles/footer") %>
