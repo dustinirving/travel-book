@@ -59,10 +59,8 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
     travelExperience: req.body.travelExperience,
     UserId: req.user.id
   }
-  console.log(req.body)
   try {
     const post = await Post.create(data)
-    console.log(req.files)
     if (req.files && req.files.imageURL) {
       const image = req.files.imageURL
       // Prepend the fileName with the User.id to prevent naming collisions
@@ -81,19 +79,6 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
   }
 })
 
-// UPDATE ROUTE
-router.get('/post/:id/edit', async function (req, res) {
-  try {
-    // let editPost = await Post.findByPk(req.params.id)
-    // res.status(200).json({ data: editPost })
-    res.render('view')
-  } catch (err) {
-    // console.log(`GET failed \n`, err)
-    res.status(500).json({ errors: [err] })
-    // res.redirect('home')
-  }
-})
-
 router.get('/view/:id', async function (req, res) {
   try {
     const post = await Post.findOne({
@@ -101,6 +86,7 @@ router.get('/view/:id', async function (req, res) {
       include: [User]
     })
     const postObject = {
+      id: post.dataValues.id,
       author: post.dataValues.User.username,
       authorId: post.dataValues.UserId,
       location: post.dataValues.location,
@@ -116,12 +102,55 @@ router.get('/view/:id', async function (req, res) {
   }
 })
 
-//  PUT route for updating posts
-router.put('/post/:id', async function (req, res) {
+//  DELETE route for deleting posts
+router.delete('/view/delete/:id', async function (req, res) {
   try {
     const post = await Post.findByPk(req.params.id)
-    await post.update(req.body)
-    res.status(200).json({ data: post })
+    await post.destroy()
+    res.status(200).json(post)
+  } catch (err) {
+    console.log('GET /posts failed \n', err)
+    res.status(500).json({ errors: [err] })
+  }
+})
+
+// UPDATE ROUTE
+router.get('/edit/post/:id', async function (req, res) {
+  try {
+    const post = await Post.findByPk(req.params.id)
+    const postObject = {
+      id: post.dataValues.id,
+      authorId: post.dataValues.UserId,
+      location: post.dataValues.location,
+      travelExperience: post.dataValues.travelExperience,
+      imageURL: post.dataValues.imageURL,
+      userId: req.user.id
+    }
+    res.render('edit', postObject)
+  } catch (err) {
+    // console.log(`GET failed \n`, err)
+    res.status(500).json({ errors: [err] })
+    // res.redirect('home')
+  }
+})
+//  PUT route for updating posts
+router.post('/edit/post/:id', async function (req, res) {
+  const post = await Post.findByPk(req.params.id)
+  const data = {
+    location: req.body.location,
+    travelExperience: req.body.travelExperience,
+    UserId: req.user.id
+  }
+  try {
+    const updatedPost = await post.update(data)
+    if (req.files && req.files.imageURL) {
+      const image = req.files.imageURL
+      const fileName = `${updatedPost.id}_${image.name}`
+      await image.mv(path.join(__dirname, '..', 'public', 'images', fileName))
+      updatedPost.imageURL = `/images/${fileName}`
+      updatedPost.save()
+    }
+    res.status(200).redirect('/posts/home')
   } catch (err) {
     console.log('GET /posts failed \n', err)
     res.status(500).json({ errors: [err] })
@@ -136,18 +165,6 @@ router.put('/post/:id', async function (req, res) {
 //       console.log('GET /posts failed \n', err)
 //       res.status(500).json({ errors: [err] })
 //     })
-// })
-
-//  DELETE route for deleting posts
-// router.delete('/posts/:id', async function (req, res) {
-//   try {
-//     const post = await Post.findByPk(req.params.id)
-//     await post.destroy()
-//     res.status(200).json({ data: post })
-//   } catch (err) {
-//     console.log('GET /posts failed \n', err)
-//     res.status(500).json({ errors: [err] })
-//   }
 // })
 
 module.exports = router

@@ -12,8 +12,16 @@
     </div>
   </div>
   <%if (authorId === userId) { %>
-  <form action="/posts/post/edit" method="GET">
-    <button class="ui button" type="submit">Edit Post</button>
-  </form>
+
+  <a href="/posts/edit/post/<%=id%>"
+    ><button class="ui button">
+      Edit Post
+    </button></a
+  >
+
+  <button postId="<%=id%>" id="delete-btn" class="ui button">
+    Delete Post
+  </button>
+
   <% } %>
 </div>
