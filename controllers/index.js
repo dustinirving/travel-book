@@ -39,7 +39,7 @@ router.post(
 
 /*
   function to check various possibilities for the ip address in the req object
-  returns an object of longtitude and latitude coordinates using iplocate 
+  returns an object of longtitude and latitude coordinates using iplocate
 */
 const ipConvert = async req => {
   const address =
