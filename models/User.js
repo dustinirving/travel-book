@@ -14,6 +14,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: { notEmpty: true, len: [6] }
+      },
+      longitude: {
+        type: DataTypes.FLOAT,
+        defaultValue: null
+      },
+      latitude: {
+        type: DataTypes.FLOAT,
+        defaultValue: null
+      },
+      location: {
+        type: DataTypes.GEOMETRY('POINT')
       }
     },
     { sequelize }

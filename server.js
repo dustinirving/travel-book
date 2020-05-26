@@ -28,10 +28,10 @@ app.use(
 // Allow Express to automatically serve static resource like the
 app.use(express.static('./public'))
 
-// Use handlebars
+// Use ejs template engine
 app.set('view engine', 'ejs')
 
-// Authentication middleware
+// Authentication middleware to encrypt and decrypt session key
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({
@@ -61,7 +61,7 @@ app.get('*', (req, res) => {
 })
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
 })
