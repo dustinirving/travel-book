@@ -28,10 +28,10 @@ app.use(
 // Allow Express to automatically serve static resource like the
 app.use(express.static('./public'))
 
-// Use handlebars
+// Use ejs template engine
 app.set('view engine', 'ejs')
 
-// Authentication middleware
+// Authentication middleware to encrypt and decrypt session key
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({
