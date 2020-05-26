@@ -1,25 +1,42 @@
-<div class="ui card">
-  <div class="image">
-    <div class="ui dimmer">
-      <div class="content">
-        <div class="center">
-          <div class="ui inverted button">Add Friend</div>
+<div class="ui segment">
+  <div class="ui center aligned inverted teal segment">
+    <h3>
+      Recommended Friends
+    </h3>
+  </div>
+
+  <div class="ui column centered grid">
+    <div class="column">
+      <!-- Loop through recommendedFriends array from user controller and display information on recommendation page -->
+      <% recommendedFriends.forEach(function(friend) { %>
+      <div class="ui">
+        <div class="ui column cards">
+          <div class="card">
+            <div class="content">
+              <div class="header">
+                <a class="ui teal image label">
+                  <img src=<%= friend.userImage %> /> <%= friend.username %>
+                </a>
+              </div>
+              <div class="meta">
+                Joined <%= friend.joinDate %>
+              </div>
+              <div class="description">
+                <%= friend.username %> is <%= friend.distance%> km away from you
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui two column doubling buttons">
+                <div class="ui basic green button">Connect</div>
+                <div class="ui basic red button">Decline</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <% }); %>
+
+      <!-- center -->
     </div>
-    <img src="/images/wireframe/image.png" />
-  </div>
-  <div class="content">
-    <div class="header">Title 3</div>
-    <div class="meta">
-      <a class="group">Meta 3</a>
-    </div>
-    <div class="description">
-      Five or Six sentence description that may go to several lines
-    </div>
-  </div>
-  <div class="extra content">
-    <a class="right floated created">Arbitrary</a>
-    <a class="friends"> Arbitrary</a>
   </div>
 </div>
