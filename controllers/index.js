@@ -39,7 +39,7 @@ router.post(
 
 /*
   function to check various possibilities for the ip address in the req object
-  ?returns the ip address
+  returns an object of longtitude and latitude coordinates using iplocate 
 */
 const ipConvert = async req => {
   const address =
@@ -53,57 +53,6 @@ const ipConvert = async req => {
   return await iplocate(address)
 }
 
-/* 
-  distance function for comparing the longitude and latitude of two different locations
-
-*/
-const distance = (lat1, lon1, lat2, lon2, unit) => {
-  if (lat1 === lat2 && lon1 === lon2) {
-    return 0
-  } else {
-    const radlat1 = (Math.PI * lat1) / 180
-    const radlat2 = (Math.PI * lat2) / 180
-    const theta = lon1 - lon2
-    const radtheta = (Math.PI * theta) / 180
-    let dist =
-      Math.sin(radlat1) * Math.sin(radlat2) +
-      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta)
-    if (dist > 1) {
-      dist = 1
-    }
-    dist = Math.acos(dist)
-    dist = (dist * 180) / Math.PI
-    dist = dist * 60 * 1.1515
-    if (unit === 'K') {
-      dist = dist * 1.609344
-    }
-    if (unit === 'N') {
-      dist = dist * 0.8684
-    }
-    return dist
-  }
-}
-
-// db.Point.findAll({
-//   attributes: [
-//     [
-//       sequelize.literal(
-//         '6371 * acos(cos(radians(' +
-//           lat +
-//           ')) * cos(radians(latitude)) * cos(radians(' +
-//           lng +
-//           ') - radians(longitude)) + sin(radians(' +
-//           lat +
-//           ')) * sin(radians(latitude)))'
-//       ),
-//       'distance'
-//     ]
-//   ],
-//   order: sequelize.col('distance'),
-//   limit: 10
-// })
-
-
 router.post('/signup', async (req, res) => {
   const { username, password, checkbox } = req.body
   const errors = []
@@ -114,8 +63,7 @@ router.post('/signup', async (req, res) => {
   const termsErr = 'You must agree to the Terms and Conditions'
 
   // retrieve the long and lat by converting the ip address using the ip function
-  let {longitude, latitude} = await ipConvert(req)
-  let data = await ipConvert(req)
+  let { longitude, latitude } = await ipConvert(req)
   longitude = parseFloat(longitude || 0.00)
   latitude = parseFloat(latitude || 0.00)
 
