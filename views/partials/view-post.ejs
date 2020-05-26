@@ -19,11 +19,19 @@
   <div class="ui grid">
     <div class="row">
       <div class="column">
+        <%if (imageURL) { %>
         <img
           class="ui large floated right image"
           src="<%=imageURL%>"
           alt="Travel Image"
         />
+        <% } %> <%if (!imageURL) { %>
+        <img
+          class="ui large floated right image"
+          src="/assets/default.png"
+          alt="Travel Image"
+        />
+        <% } %>
         <div class="description">
           <%= travelExperience %>
         </div>

@@ -49,29 +49,39 @@ router.get('/post/new', isAuthenticated, function (req, res) {
 })
 
 router.post('/post/new', isAuthenticated, async (req, res, next) => {
+  const emptyLocationErr = 'You cannot leave the location empty.'
+  const emptyTravelExperienceErr =
+    'You cannot leave the travel experience empty.'
+  const errors = []
   const data = {
     location: req.body.location,
     travelExperience: req.body.travelExperience,
     UserId: req.user.id
   }
-  try {
-    const post = await Post.create(data)
-    if (req.files && req.files.imageURL) {
-      const image = req.files.imageURL
-      // Prepend the fileName with the User.id to prevent naming collisions
-      // with other users uploading files with the same name.
-      const fileName = `${post.id}_${image.name}`
-      // Move the file from the tmp location to the public folder.
-      await image.mv(path.join(__dirname, '..', 'public', 'images', fileName))
-      // Record the public URL on the User model and store it in the database.
-      post.imageURL = `/images/${fileName}`
-      post.save()
-    }
-    res.status(201).redirect('/posts/home')
-  } catch (err) {
-    res.status(500).json({ errors: [err] })
-    next(err)
+  if (data.location === '') errors.push({ msg: emptyLocationErr })
+  if (data.travelExperience === '') {
+    errors.push({ msg: emptyTravelExperienceErr })
   }
+  if (errors.length === 0) {
+    try {
+      const post = await Post.create(data)
+      if (req.files && req.files.imageURL) {
+        const image = req.files.imageURL
+        // Prepend the fileName with the User.id to prevent naming collisions
+        // with other users uploading files with the same name.
+        const fileName = `${post.id}_${image.name}`
+        // Move the file from the tmp location to the public folder.
+        await image.mv(path.join(__dirname, '..', 'public', 'images', fileName))
+        // Record the public URL on the User model and store it in the database.
+        post.imageURL = `/images/${fileName}`
+        post.save()
+      }
+      res.status(201).redirect('/posts/home')
+    } catch (err) {
+      res.status(500).json({ errors: [err] })
+      next(err)
+    }
+  } else res.render('create', { errors })
 })
 
 router.get('/view/:id', isAuthenticated, async function (req, res) {
@@ -130,6 +140,7 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
 })
 //  PUT route for updating posts
 router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
+  // const post = await Post.findByPk(req.params.id)
   const data = {
     location: req.body.location,
     travelExperience: req.body.travelExperience,
