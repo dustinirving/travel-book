@@ -17,7 +17,10 @@
     </div>
   </div>
   <div class="ten wide stretched column">
-    <h2>Welcome back <%= userBio.firstName.toUpperCase() %> <%= userBio.lastName.toUpperCase() %></h2>
+    <h2>
+      Welcome back <%= userBio.firstName.toUpperCase() %> <%=
+      userBio.lastName.toUpperCase() %>
+    </h2>
     <div id="bio" class="ui segment">
       <%- include ("profiles/bio") %>
     </div>

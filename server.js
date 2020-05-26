@@ -15,6 +15,7 @@ const app = express()
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+// Method override used for put request in the form
 app.use(methodOverride('_method'))
 
 // Middleware for uploading images
@@ -41,7 +42,7 @@ app.use(
   })
 )
 
-// Connects flash
+// Connects flash to add an error message
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.error = req.flash('error')

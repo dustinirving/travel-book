@@ -1,8 +1,10 @@
+<!-- Insert the landing header to use landing.css styling -->
 <%- include ("partials/landing-header") %>
 <div class="ui doubling two column grid container">
   <div class="row">
     <div class="centered column" id="login-align">
       <div class="ui segment">
+        <!-- Post request form for login validation -->
         <form class="ui form" id="login-form" action="/login" method="POST">
           <h2 class="ui aligned center header">Login</h2>
           <div class="field">
@@ -25,7 +27,7 @@
               value="<%= typeof password != 'undefined' ? name : '' %>"
             />
           </div>
-
+          <!-- Add flash message if the credentials are invalid -->
           <% if (error != '') { %>
           <div class="ui red message">
             <%= error[0] %>
@@ -52,4 +54,5 @@
     </div>
   </div>
 </div>
+<!-- Insert the main footer -->
 <%- include ("partials/main-footer") %>
