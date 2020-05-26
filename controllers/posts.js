@@ -141,7 +141,6 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
 //  PUT route for updating posts
 router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
   const post = await Post.findByPk(req.params.id)
-  console.log(req.files)
   const data = {
     location: req.body.location,
     travelExperience: req.body.travelExperience,
