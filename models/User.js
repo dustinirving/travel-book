@@ -17,27 +17,27 @@ module.exports = (sequelize, DataTypes) => {
       },
       firstname: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       lastname: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       phonenumber: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       avatar: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       longitude: {
         type: DataTypes.FLOAT,
