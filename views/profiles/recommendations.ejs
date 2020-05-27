@@ -1,40 +1,51 @@
-<div class="ui segment">
-  <div class="ui center aligned inverted teal segment">
-    <h3>
-      Recommended Friends
-    </h3>
+<div class="ui center aligned segment">
+  <div class="ui two column centered grid">
+    <div class="column centered row">
+      <div class="sixteen wide column center aligned">
+        <div class="ui inverted teal segment">
+          <h3>
+            Recommended Friends
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="column centered row">
+      <div class="column">
+        <% recommendedFriends.forEach(function(friend) { %>
+        <div class="ui">
+          <div class="ui column cards">
+            <div class="card">
+              <div class="content">
+                <div class="header">
+                  <a class="ui teal image label">
+                    <img src=<%= friend.userImage %> /> <%= friend.username %>
+                  </a>
+                </div>
+                <div class="meta">
+                  Joined <%= friend.joinDate %>
+                </div>
+                <div class="description">
+                  <%= friend.username %> is <%= friend.distance%> km away from
+                  you
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two column doubling buttons">
+                  <div class="ui basic green button">Connect</div>
+                  <div class="ui basic red button">Decline</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
   </div>
 
   <div class="ui column centered grid">
     <div class="column">
       <!-- Loop through recommendedFriends array from user controller and display information on recommendation page -->
-      <% recommendedFriends.forEach(function(friend) { %>
-      <div class="ui">
-        <div class="ui column cards">
-          <div class="card">
-            <div class="content">
-              <div class="header">
-                <a class="ui teal image label">
-                  <img src=<%= friend.userImage %> /> <%= friend.username %>
-                </a>
-              </div>
-              <div class="meta">
-                Joined <%= friend.joinDate %>
-              </div>
-              <div class="description">
-                <%= friend.username %> is <%= friend.distance%> km away from you
-              </div>
-            </div>
-            <div class="extra content">
-              <div class="ui two column doubling buttons">
-                <div class="ui basic green button">Connect</div>
-                <div class="ui basic red button">Decline</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% }); %>
 
       <!-- center -->
     </div>
