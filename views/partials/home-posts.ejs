@@ -13,7 +13,8 @@
   <div class="content">
     <h3 class="ui header"><%= post.location %></h3>
     <div class="ui right floated item">
-      By: <%= post.author %>
+      <img class="ui avatar image" src=<%= post.avatar %> />
+      <span><%= post.author %></span>
     </div>
 
     <div class="description">

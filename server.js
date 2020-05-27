@@ -29,10 +29,10 @@ app.use(
 // Allow Express to automatically serve static resource like the
 app.use(express.static('./public'))
 
-// Use ejs template engine
+// Use EJS template
 app.set('view engine', 'ejs')
 
-// Authentication middleware to encrypt and decrypt session key
+// Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({
@@ -42,7 +42,7 @@ app.use(
   })
 )
 
-// Connects flash to add an error message
+// Connects flash to add an error message for login
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.error = req.flash('error')

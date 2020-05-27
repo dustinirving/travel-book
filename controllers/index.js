@@ -27,9 +27,6 @@ router.get('/logout', function (req, res) {
   res.redirect('/')
 })
 
-<<<<<<< HEAD
-// To make a signup post request
-=======
 router.post(
   '/login',
   passport.authenticate('local', {
@@ -58,7 +55,6 @@ const ipConvert = async req => {
   return await iplocate(address)
 }
 
->>>>>>> master
 router.post('/signup', async (req, res) => {
   // Object destructuring from the req.body
   const { username, password, checkbox } = req.body
@@ -74,17 +70,13 @@ router.post('/signup', async (req, res) => {
   const userExistsErr = 'That username already exists.'
   // Agree to the terms and conditions error
   const termsErr = 'You must agree to the Terms and Conditions'
-<<<<<<< HEAD
-  // Query the database to see if the user already exists
-=======
 
   // retrieve the long and lat by converting the ip address using the ip function
   let { longitude, latitude } = await ipConvert(req)
-  longitude = parseFloat(longitude || 0.00)
-  latitude = parseFloat(latitude || 0.00)
+  longitude = parseFloat(longitude || 0.0)
+  latitude = parseFloat(latitude || 0.0)
 
   // Check if the username already exists
->>>>>>> master
   const usernameExists = await User.findOne({
     where: {
       username: username
@@ -96,11 +88,7 @@ router.post('/signup', async (req, res) => {
   if (usernameExists) errors.push({ msg: userExistsErr })
   if (!checkbox) errors.push({ msg: termsErr })
 
-<<<<<<< HEAD
-  // There is an error, so render the errors
-=======
   // Check to see if there is an error
->>>>>>> master
   if (errors.length > 0) {
     res.render('signup', { errors, username })
   } else {
@@ -117,22 +105,4 @@ router.post('/signup', async (req, res) => {
   }
 })
 
-<<<<<<< HEAD
-// Post route for logging in
-// Use passport to authenticate the user
-// If successful, redirect to the main posts page, otherwise re render the login page with flash message errors
-router.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/posts/home',
-    failureRedirect: '/login',
-    failureFlash: true
-  }),
-  function (req, res) {
-    req.flash('error', 'Invalid password or username.')
-  }
-)
-// Export the router
-=======
->>>>>>> master
 module.exports = router

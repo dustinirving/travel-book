@@ -6,6 +6,8 @@ const router = require('express').Router()
 const { Post, User } = require('../models')
 // Use authentication middleware to only grant access to logged in users
 const isAuthenticated = require('../config/middleware/isAuthenticated')
+// Generate the fake profile
+const faker = require('faker')
 
 //  GET route for getting all of the posts
 router.get('/home', isAuthenticated, async function (req, res) {
@@ -35,7 +37,8 @@ router.get('/home', isAuthenticated, async function (req, res) {
           author: user,
           location: item.dataValues.location,
           travelExperience: travelExperienceStr,
-          imageURL: item.dataValues.imageURL
+          imageURL: item.dataValues.imageURL,
+          avatar: faker.image.avatar()
         }
         postsArray.push(postObject)
       })
@@ -162,23 +165,12 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
 //  PUT route for updating posts
 router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
   try {
-<<<<<<< HEAD
-    // Query by its primary key
     const post = await Post.findByPk(req.params.id)
-    // Select data to be updated
-=======
-    const post = await Post.findByPk(req.params.id)
->>>>>>> master
     const data = {
       location: req.body.location,
       travelExperience: req.body.travelExperience,
       UserId: req.user.id
     }
-<<<<<<< HEAD
-    // Update the database
-=======
-
->>>>>>> master
     const updatedPost = await post.update(data)
     // Upload the picture if it exists and has an imageURL
     if (req.files && req.files.imageURL) {
