@@ -2,7 +2,6 @@
 const router = require('express').Router()
 const { Post, User } = require('../models')
 const isAuthenticated = require('../config/middleware/isAuthenticated')
-const faker = require('faker')
 
 // Get data to be used for the user's profile
 router.get('/profile', isAuthenticated, async function (req, res) {
@@ -24,16 +23,16 @@ router.get('/profile', isAuthenticated, async function (req, res) {
     localDate.splice(0, 1)
     localDate = localDate.join(' ')
 
-    // Get all user data to be used in profile - a mix of real data from req.user and faker data
+    // Get all user data to be used in profile from the user object
     const userBio = {
-      avatar: faker.image.avatar(),
+      avatar: req.user.avatar,
       username: req.user.username,
       userID: req.user.id,
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      email: faker.internet.email(),
-      phoneNumber: faker.phone.phoneNumber(),
-      address: faker.address.streetAddress(),
+      firstName: req.user.firstname,
+      lastName: req.user.lastname,
+      email: req.user.email,
+      phoneNumber: req.user.phonenumber,
+      address: req.user.streetaddress,
       joinDate: localDate
     }
 
@@ -49,6 +48,7 @@ router.get('/profile', isAuthenticated, async function (req, res) {
       attributes: [
         'username',
         'createdAt',
+        'avatar',
         [
           User.sequelize.literal(
             '6371 * acos(cos(radians(' +
@@ -67,25 +67,20 @@ router.get('/profile', isAuthenticated, async function (req, res) {
     })
 
     /*
-      - Set seed = 100 (to make faker data generation predicatable)
       Loop through the array of other user's data
-        - increment seeds to create new instance of faker avatar
-        - get the createdAt, username, and distance variables
+        - get the createdAt, username, avatar, and distance variables
+        - format createdAt date string
     */
     const recommendedFriends = []
-    let seedNum = 100
     for (const user of distanceArray) {
       if (req.user.username !== user.dataValues.username) {
-        const { username, createdAt, distance } = user.dataValues
+        const { avatar, username, createdAt, distance } = user.dataValues
         const utcDate = createdAt
         let joinDate = new Date(utcDate).toDateString().split(' ')
         joinDate.splice(0, 1)
         joinDate = joinDate.join(' ')
 
-        seedNum++
-        faker.seed(seedNum)
-        const userImage = faker.image.avatar()
-        const data = { username, joinDate, distance, userImage: userImage }
+        const data = { username, joinDate, distance, avatar }
         recommendedFriends.push(data)
       }
     }
