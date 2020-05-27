@@ -11,6 +11,7 @@
     </div>
     <div class="column centered row">
       <div class="column">
+        <!-- recommendedFriends array from controllers/users.js -->
         <% recommendedFriends.forEach(function(friend) { %>
         <div class="ui">
           <div class="ui column cards">
@@ -18,7 +19,7 @@
               <div class="content">
                 <div class="header">
                   <a class="ui teal image label">
-                    <img src=<%= friend.userImage %> /> <%= friend.username %>
+                    <img src=<%= friend.avatar %> /> <%= friend.username %>
                   </a>
                 </div>
                 <div class="meta">
