@@ -140,14 +140,15 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
 })
 //  PUT route for updating posts
 router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
-  // const post = await Post.findByPk(req.params.id)
-  const data = {
-    location: req.body.location,
-    travelExperience: req.body.travelExperience,
-    UserId: req.user.id
-  }
   try {
-    const updatedPost = await Post.update(data)
+    const post = await Post.findByPk(req.params.id)
+    const data = {
+      location: req.body.location,
+      travelExperience: req.body.travelExperience,
+      UserId: req.user.id
+    }
+
+    const updatedPost = await post.update(data)
     if (req.files && req.files.imageURL) {
       const image = req.files.imageURL
       const fileName = `${updatedPost.id}_${image.name}`
