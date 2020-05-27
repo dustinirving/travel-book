@@ -1,7 +1,9 @@
+<!-- Insert the main header and navbar -->
 <%- include ("partials/main-header") %> <%- include ("partials/navbar") %>
 <div class="ui blue container">
   <div class="ui segment padded">
     <h1 class="ui aligned center header">Create a Post</h1>
+    <!-- The form to make a post request with the location, travel experience and photo -->
     <form
       class="ui form"
       action="/posts/post/new"
@@ -25,6 +27,7 @@
         <label>Upload an image</label>
         <input type="file" id="img" name="imageURL" />
       </div>
+      <!-- Conditonally render errors if the location or travel experience is empty -->
       <% if(typeof errors != 'undefined') { %>
       <div class="ui red message">
         <% errors.forEach(function(error) { %>
@@ -38,4 +41,5 @@
     </form>
   </div>
 </div>
+<!-- Insert the main footer -->
 <%- include ("partials/main-footer") %>

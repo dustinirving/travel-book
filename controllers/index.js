@@ -1,26 +1,28 @@
-// const express = require('express')
+// Pull out the User sequelize model
 const { User } = require('../models')
+// Requrie router to add routing
 const router = require('express').Router()
+// Require passport to authenticate user login
 const passport = require('passport')
 const iplocate = require('node-iplocate')
 const faker = require('faker')
 
-// root route //
+// Render the home page
 router.get('/', function (req, res) {
   res.render('index')
 })
 
-// show signup form //
+// Render the signup page
 router.get('/signup', function (req, res) {
   res.render('signup')
 })
 
-// show login form
+// Render the login page
 router.get('/login', function (req, res) {
   res.render('login')
 })
 
-// Route for logging user out
+// Route for logging the user out, and redirect them to the home page
 router.get('/logout', function (req, res) {
   req.logout()
   res.redirect('/')
@@ -55,12 +57,19 @@ const ipConvert = async req => {
 }
 
 router.post('/signup', async (req, res) => {
+  // Object destructuring from the req.body
   const { username, password, checkbox } = req.body
+  // Initialize an empty array for error messages
   const errors = []
+  // Initialize an empty array for the success message
   const success = []
+  // Username length error
   const usernameErr = 'Your username must be at least 6 characters.'
+  // Password length error
   const passwordErr = 'Your password must be at least 6 characters.'
+  // The username already exists error
   const userExistsErr = 'That username already exists.'
+  // Agree to the terms and conditions error
   const termsErr = 'You must agree to the Terms and Conditions'
 
   // Check if the username already exists
@@ -69,6 +78,7 @@ router.post('/signup', async (req, res) => {
       username: username
     }
   })
+  // Add the appropriate errors if the confitions are true
   if (username.length < 6) errors.push({ msg: usernameErr })
   if (password.length < 6) errors.push({ msg: passwordErr })
   if (usernameExists) errors.push({ msg: userExistsErr })
@@ -91,6 +101,7 @@ router.post('/signup', async (req, res) => {
   if (errors.length > 0) {
     res.render('signup', { errors, username })
   } else {
+    // otherwise create a new user with username and password in the database
     await User.create({
       username: username,
       password: username,
@@ -103,7 +114,7 @@ router.post('/signup', async (req, res) => {
       phonenumber,
       address
     })
-
+    // Render the page with a success message
     success.push({ msg: 'You have successfully registered.' })
     res.status(201).render('signup', { success })
   }

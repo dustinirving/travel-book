@@ -15,6 +15,7 @@ const app = express()
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+// Method override used for put request in the form
 app.use(methodOverride('_method'))
 
 // Middleware for uploading images
@@ -28,10 +29,10 @@ app.use(
 // Allow Express to automatically serve static resource like the
 app.use(express.static('./public'))
 
-// Use ejs template engine
+// Use EJS template
 app.set('view engine', 'ejs')
 
-// Authentication middleware to encrypt and decrypt session key
+// Authentication middleware
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({
@@ -41,7 +42,7 @@ app.use(
   })
 )
 
-// Connects flash
+// Connects flash to add an error message for login
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.error = req.flash('error')
@@ -62,7 +63,7 @@ app.get('*', (req, res) => {
 })
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
 })

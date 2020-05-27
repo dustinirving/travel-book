@@ -8,7 +8,11 @@
       <div class="ui segment padded">
         <div class="item">
           <div class="ui small image floated left">
+            <%if (post.imageURL) { %>
             <img src="<%=post.imageURL%>" alt="Travel image" />
+            <% }%> <%if (!post.imageURL) { %>
+            <img src="/assets/default.png" alt="Travel image" />
+            <% }%>
           </div>
           <div class="content">
             <h3 class="ui header"><%= post.location %></h3>
