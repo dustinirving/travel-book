@@ -1,15 +1,17 @@
-# travel-book
+# travelbook
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![GitHub issues](https://img.shields.io/github/issues-raw/dustinirving/travel-book) ![Contributors](https://img.shields.io/github/contributors/dustinirving/travel-book) ![Last Commit](https://img.shields.io/github/last-commit/dustinirving/travel-book) [![Build Status](https://travis-ci.com/dustinirving/travel-book.svg?branch=master)](https://travis-ci.com/dustinirving/travel-book) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A social media platform that allows users to share travel experiences with `travel book` visitors. Users will need to create an account, and sign in to share or view other users travel profile pages. A user can view profiles, add travel details, update the travel details, delete entries.
+
+A social media platform for sharing travel experiences with other `travel book` users. Users will need to create an account and sign in to share or view other users travel profile pages. A user can view all posts, add new travel posts, update and delete their own posts, view their own profile. The user's profile displays the users information, own posts, recommended friends, allows the user to update personal settings.
 
 ### Deployed Site
+> https://thetravelbook.herokuapp.com/
 
-https://thetravelbook.herokuapp.com/
+### Demo
+> Coming soon...
 
 ### Tech Stack
-
 Semantic UI / EJS / Node.js / Express / Sequelize / MySQL
 
 ## Installation
@@ -40,11 +42,6 @@ The following npm packages are dependencies:
 7. Click the logo to navigate to the main posts page
 8. Click the profile tab to view bio, posts, recommendations and settings
 
-## License & Copyright
-
-&copy; Copyright - 2020 Dustin Irving, Larry Agbana, and Solomon Eke
-
-Licensed under the [MIT License](LICENSE).
 
 ## Contributing
 
@@ -57,20 +54,20 @@ Licensed under the [MIT License](LICENSE).
 
 ## Team Members
 
-Dustin Irving -
+Dustin Irving </br>
+> GitHub: https://github.com/dustinirving </br>
+> Email: dustin.irving@gmail.com
 
-https://github.com/dustinirving
+Larry Agbana </br>
+> GitHub: https://github.com/Lagbana </br>
+> Email: larryagbana@gmail.com
 
-dustin.irving@gmail.com
+Solomon Eke </br>
+> GitHub: https://github.com/solomon-eke </br>
+> Email: ekesolomon11@gmail.com
 
-Larry Agbana -
+## License & Copyright
 
-https://github.com/Lagbana
+&copy; Copyright - 2020 Dustin Irving, Larry Agbana, and Solomon Eke </br>
+Licensed under the [MIT License](LICENSE).
 
-larryagbana@gmail.com
-
-Solomon Eke -
-
-https://github.com/solomon-eke
-
-ekesolomon11@gmail.com)
