@@ -135,9 +135,7 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
     }
     res.render('edit', postObject)
   } catch (err) {
-    // console.log(`GET failed \n`, err)
     res.status(500).json({ errors: [err] })
-    // res.redirect('home')
   }
 })
 //  PUT route for updating posts
