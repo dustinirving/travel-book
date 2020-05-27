@@ -116,7 +116,8 @@ router.get('/view/:id', isAuthenticated, async function (req, res) {
       location: post.dataValues.location,
       travelExperience: post.dataValues.travelExperience,
       imageURL: post.dataValues.imageURL,
-      userId: req.user.id
+      userId: req.user.id,
+      avatar: req.user.avatar
     }
     res.render('view', postObject)
   } catch (err) {
