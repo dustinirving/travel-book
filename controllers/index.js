@@ -3,6 +3,7 @@ const { User } = require('../models')
 const router = require('express').Router()
 const passport = require('passport')
 const iplocate = require('node-iplocate')
+const faker = require('faker')
 
 // root route //
 router.get('/', function (req, res) {
@@ -62,11 +63,6 @@ router.post('/signup', async (req, res) => {
   const userExistsErr = 'That username already exists.'
   const termsErr = 'You must agree to the Terms and Conditions'
 
-  // retrieve the long and lat by converting the ip address using the ip function
-  let { longitude, latitude } = await ipConvert(req)
-  longitude = parseFloat(longitude || 0.00)
-  latitude = parseFloat(latitude || 0.00)
-
   // Check if the username already exists
   const usernameExists = await User.findOne({
     where: {
@@ -78,6 +74,19 @@ router.post('/signup', async (req, res) => {
   if (usernameExists) errors.push({ msg: userExistsErr })
   if (!checkbox) errors.push({ msg: termsErr })
 
+  // retrieve the long and lat by converting the ip address using the ip function
+  let { longitude, latitude } = await ipConvert(req)
+  longitude = parseFloat(longitude || 0.0)
+  latitude = parseFloat(latitude || 0.0)
+
+  // Seed the DB USER with fake user information
+  const avatar = faker.image.avatar()
+  const firstname = faker.name.firstName()
+  const lastname = faker.name.lastName()
+  const email = faker.internet.email()
+  const phonenumber = faker.phone.phoneNumber()
+  const address = faker.address.streetAddress()
+
   // Check to see if there is an error
   if (errors.length > 0) {
     res.render('signup', { errors, username })
@@ -86,7 +95,13 @@ router.post('/signup', async (req, res) => {
       username: username,
       password: username,
       longitude,
-      latitude
+      latitude,
+      avatar,
+      firstname,
+      lastname,
+      email,
+      phonenumber,
+      address
     })
 
     success.push({ msg: 'You have successfully registered.' })
