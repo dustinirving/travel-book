@@ -35,7 +35,7 @@ router.get('/profile', isAuthenticated, async function (req, res) {
       lastName: req.user.lastname,
       email: req.user.email,
       phoneNumber: req.user.phonenumber,
-      address: req.user.streetaddress,
+      address: req.user.address,
       joinDate: localDate
     }
 
