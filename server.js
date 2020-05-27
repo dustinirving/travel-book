@@ -49,11 +49,12 @@ app.use((req, res, next) => {
   next()
 })
 
+// Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Routes
-// =============================================================
+// Routes Handler
+// ================================================
 app.use('/posts', require('./controllers/posts'))
 app.use('/users', require('./controllers/users'))
 app.use('/', require('./controllers/index'))

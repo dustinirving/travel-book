@@ -15,6 +15,30 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: { notEmpty: true, len: [6] }
       },
+      firstname: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      lastname: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      phonenumber: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      avatar: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
       longitude: {
         type: DataTypes.FLOAT,
         defaultValue: null

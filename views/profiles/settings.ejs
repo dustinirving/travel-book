@@ -1,9 +1,12 @@
 <div class="ui placeholder segment">
-  
   <div class="ui two column very relaxed stackable grid">
-    
     <div class="column">
-      <div class="ui form">
+      <form
+        class="ui form"
+        enctype="multipart/form-data"
+        action="/users/edit/username/?_method=PUT"
+        method="POST"
+      >
         <div class="field">
           <h3>Update Username</h3>
         </div>
@@ -17,14 +20,12 @@
         <div class="field">
           <label>New</label>
           <div class="ui left icon input">
-            <input type="text" />
+            <input type="text" name="newUsername" />
             <i class="user icon"></i>
           </div>
         </div>
-        <div class="ui blue submit button">Update</div>
-      </div>
+        <button class="ui blue submit button" type="submit">Submit</button>
+      </form>
     </div>
-
   </div>
-
 </div>

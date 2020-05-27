@@ -6,8 +6,6 @@ const router = require('express').Router()
 const { Post, User } = require('../models')
 // Use authentication middleware to only grant access to logged in users
 const isAuthenticated = require('../config/middleware/isAuthenticated')
-// Generate the fake profile
-const faker = require('faker')
 
 //  GET route for getting all of the posts
 router.get('/home', isAuthenticated, async function (req, res) {
@@ -27,6 +25,7 @@ router.get('/home', isAuthenticated, async function (req, res) {
       await asyncForEach(postsData, async item => {
         const dataObject = await User.findByPk(item.dataValues.UserId)
         const user = await dataObject.dataValues.username
+        const userAvatar = await dataObject.dataValues.avatar
         let travelExperienceStr = item.dataValues.travelExperience
         if (travelExperienceStr.length > 975) {
           travelExperienceStr = travelExperienceStr.slice(0, 975) + '...'
@@ -35,10 +34,10 @@ router.get('/home', isAuthenticated, async function (req, res) {
         const postObject = {
           id: item.dataValues.id,
           author: user,
+          avatar: userAvatar,
           location: item.dataValues.location,
           travelExperience: travelExperienceStr,
-          imageURL: item.dataValues.imageURL,
-          avatar: faker.image.avatar()
+          imageURL: item.dataValues.imageURL
         }
         postsArray.push(postObject)
       })
@@ -157,9 +156,7 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
     // Render the page with the current data
     res.render('edit', postObject)
   } catch (err) {
-    // console.log(`GET failed \n`, err)
     res.status(500).json({ errors: [err] })
-    // res.redirect('home')
   }
 })
 //  PUT route for updating posts
