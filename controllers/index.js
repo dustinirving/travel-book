@@ -70,7 +70,7 @@ router.post('/signup', async (req, res) => {
   // The username already exists error
   const userExistsErr = 'That username already exists.'
   // Agree to the terms and conditions error
-  const termsErr = 'You must agree to the Terms and Conditions'
+  const termsErr = 'You must agree to the Terms and Conditions.'
 
   // Check if the username already exists
   const usernameExists = await User.findOne({
