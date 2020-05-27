@@ -1,7 +1,9 @@
+<!-- Insert the main header and navbar -->
 <%- include ("partials/main-header") %> <%- include ("partials/navbar") %>
 <div class="ui blue container">
   <div class="ui segment padded">
     <h1 class="ui aligned center header">Edit Post</h1>
+    <!-- Form to submit a put reqeust to update the post -->
     <form
       class="ui form"
       id="edit-form"
@@ -22,6 +24,7 @@
       </div>
       <div class="field">
         <label>Travel Experience</label>
+        <!-- Insert the previous travel experience to be updated -->
         <textarea
           name="travelExperience"
           id="travel-experience"
@@ -42,4 +45,5 @@
     </form>
   </div>
 </div>
+<!-- Insert the main footer -->
 <%- include ("partials/main-footer") %>

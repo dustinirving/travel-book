@@ -1,14 +1,21 @@
+// Require path to allow for relative paths
 const path = require('path')
+// Require router
 const router = require('express').Router()
+// Destructure Post and User from the sequelize models
 const { Post, User } = require('../models')
+// Use authentication middleware to only grant access to logged in users
 const isAuthenticated = require('../config/middleware/isAuthenticated')
+// Generate the fake profile
+const faker = require('faker')
 
 //  GET route for getting all of the posts
 router.get('/home', isAuthenticated, async function (req, res) {
   try {
+    // Query the database for all posts ordered by createdAt
     const postsData = await Post.findAll({ order: [['createdAt', 'DESC']] })
     // const postsData = await Post.findAll({ include: [{ model: User }] })
-    // This maps the posts Array to be displayed in the client
+    // Define a postsArray as an empty array
     const postsArray = []
     const start = async () => {
       async function asyncForEach (array, callback) {
@@ -30,10 +37,12 @@ router.get('/home', isAuthenticated, async function (req, res) {
           author: user,
           location: item.dataValues.location,
           travelExperience: travelExperienceStr,
-          imageURL: item.dataValues.imageURL
+          imageURL: item.dataValues.imageURL,
+          avatar: faker.image.avatar()
         }
         postsArray.push(postObject)
       })
+      // Render the posts with the postsArray object
       res.render('home', { postsArray })
     }
     start()
@@ -48,23 +57,29 @@ router.get('/post/new', isAuthenticated, function (req, res) {
   res.render('create')
 })
 
+// Route for creating a new post
 router.post('/post/new', isAuthenticated, async (req, res, next) => {
+  // Validation to ensure that the location and travel experience are not empty
   const emptyLocationErr = 'You cannot leave the location empty.'
   const emptyTravelExperienceErr =
     'You cannot leave the travel experience empty.'
   const errors = []
+  // Data object with location, travel experience and userid
   const data = {
     location: req.body.location,
     travelExperience: req.body.travelExperience,
     UserId: req.user.id
   }
+  // Adding errors based on conditions
   if (data.location === '') errors.push({ msg: emptyLocationErr })
   if (data.travelExperience === '') {
     errors.push({ msg: emptyTravelExperienceErr })
   }
+  // If there are no errors, create the data in the database
   if (errors.length === 0) {
     try {
       const post = await Post.create(data)
+      // Used to add the upload the files
       if (req.files && req.files.imageURL) {
         const image = req.files.imageURL
         // Prepend the fileName with the User.id to prevent naming collisions
@@ -76,20 +91,25 @@ router.post('/post/new', isAuthenticated, async (req, res, next) => {
         post.imageURL = `/images/${fileName}`
         post.save()
       }
+      // If everything is successful render the main posts page with the newly created content
       res.status(201).redirect('/posts/home')
     } catch (err) {
       res.status(500).json({ errors: [err] })
       next(err)
     }
+    // If there are validation errors render the page again with the errors
   } else res.render('create', { errors })
 })
 
+// Route to view the full post
 router.get('/view/:id', isAuthenticated, async function (req, res) {
   try {
+    // Query the database for the specific post
     const post = await Post.findOne({
       where: { id: req.params.id },
       include: [User]
     })
+    // From the query, create an object and render the page with the data
     const postObject = {
       id: post.dataValues.id,
       author: post.dataValues.User.username,
@@ -110,7 +130,9 @@ router.get('/view/:id', isAuthenticated, async function (req, res) {
 //  DELETE route for deleting posts
 router.delete('/view/delete/:id', isAuthenticated, async function (req, res) {
   try {
+    // Find the post to delete by its primary key
     const post = await Post.findByPk(req.params.id)
+    // Delete the post
     await post.destroy()
     res.status(200).json(post)
   } catch (err) {
@@ -119,9 +141,10 @@ router.delete('/view/delete/:id', isAuthenticated, async function (req, res) {
   }
 })
 
-// UPDATE ROUTE
+// Get route to edit the post
 router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
   try {
+    // Query for the post to be updated by its primary key
     const post = await Post.findByPk(req.params.id)
     const postObject = {
       id: post.dataValues.id,
@@ -131,6 +154,7 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
       imageURL: post.dataValues.imageURL,
       userId: req.user.id
     }
+    // Render the page with the current data
     res.render('edit', postObject)
   } catch (err) {
     // console.log(`GET failed \n`, err)
@@ -147,20 +171,26 @@ router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
       travelExperience: req.body.travelExperience,
       UserId: req.user.id
     }
-
     const updatedPost = await post.update(data)
+    // Upload the picture if it exists and has an imageURL
     if (req.files && req.files.imageURL) {
+      // Image url
       const image = req.files.imageURL
+      // name of the file
       const fileName = `${updatedPost.id}_${image.name}`
+      // Saving the image
       await image.mv(path.join(__dirname, '..', 'public', 'images', fileName))
+      // specifying the path
       updatedPost.imageURL = `/images/${fileName}`
+      // Saving the post
       updatedPost.save()
     }
+    // Redirect to the main posts page after the put request has been successfully completed
     res.status(200).redirect('/posts/home')
   } catch (err) {
     console.log('GET /posts failed \n', err)
     res.status(500).json({ errors: [err] })
   }
 })
-
+// Export the router
 module.exports = router

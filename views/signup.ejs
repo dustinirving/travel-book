@@ -1,8 +1,11 @@
+<!-- Insert the main header-->
 <%- include ("partials/landing-header") %>
+<!-- Responsive signup segment -->
 <div class="ui doubling two column grid container">
   <div class="row">
     <div class="centered column" id="signup-align">
       <div class="ui segment">
+        <!-- Form to send a post request with username and password -->
         <form class="ui form" id="signup-form" action="/signup" method="POST">
           <h2 class="ui aligned center header">Sign up</h2>
           <div class="field">
@@ -30,12 +33,14 @@
               <label>I agree to the Terms and Conditions.</label>
             </div>
           </div>
+          <!-- Conditionally render errors if the user has not passed validation -->
           <% if(typeof errors != 'undefined') { %>
           <div class="ui red message">
             <% errors.forEach(function(error) { %>
             <p><%= error.msg %></p>
             <% }); %>
           </div>
+          <!-- Send a success message if the user has successfully signed up -->
           <% }%> <% if(typeof success != 'undefined') { %>
           <div class="ui green message">
             <% success.forEach(function(item) { %>
@@ -65,4 +70,5 @@
     </div>
   </div>
 </div>
+<!-- Insert the main footer -->
 <%- include ("partials/main-footer") %>
