@@ -162,15 +162,23 @@ router.get('/edit/post/:id', isAuthenticated, async function (req, res) {
 //  PUT route for updating posts
 router.put('/edit/post/:id', isAuthenticated, async function (req, res) {
   try {
+<<<<<<< HEAD
     // Query by its primary key
     const post = await Post.findByPk(req.params.id)
     // Select data to be updated
+=======
+    const post = await Post.findByPk(req.params.id)
+>>>>>>> master
     const data = {
       location: req.body.location,
       travelExperience: req.body.travelExperience,
       UserId: req.user.id
     }
+<<<<<<< HEAD
     // Update the database
+=======
+
+>>>>>>> master
     const updatedPost = await post.update(data)
     // Upload the picture if it exists and has an imageURL
     if (req.files && req.files.imageURL) {

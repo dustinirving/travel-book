@@ -13,11 +13,12 @@ body {
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
-  font-size: 2.3rem;
-  line-height: 4rem;
+  font-size: 1.8rem;
+  line-height: 3rem;
   color: #000000;
   text-align: left;
   padding-left: 2rem;
+  padding-top: 1.5rem;
   padding-right: 0.5rem;
 }
 
@@ -25,8 +26,8 @@ body {
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5rem;
-  line-height: 3rem;
+  font-size: 1.25rem;
+  line-height: 2.5rem;
   color: #000000;
   text-align: left;
   padding-left: 2rem;
