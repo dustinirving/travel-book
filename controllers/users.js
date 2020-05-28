@@ -79,6 +79,7 @@ router.get('/profile', isAuthenticated, async function (req, res) {
       if (req.user.username !== user.dataValues.username) {
         const { avatar, username, createdAt, distance } = user.dataValues
         const wholeDistance = Math.round(distance)
+        console.log(wholeDistance)
         const utcDate = createdAt
         let joinDate = new Date(utcDate).toDateString().split(' ')
         joinDate.splice(0, 1)
@@ -181,17 +182,19 @@ router.put('/edit/username', isAuthenticated, async function (req, res) {
     */
     const recommendedFriends = []
     for (const user of distanceArray) {
-      if (req.body.newUsername !== user.dataValues.username) {
+      if (req.user.username !== user.dataValues.username) {
         const { avatar, username, createdAt, distance } = user.dataValues
+        const wholeDistance = parseInt(distance)
         const utcDate = createdAt
         let joinDate = new Date(utcDate).toDateString().split(' ')
         joinDate.splice(0, 1)
         joinDate = joinDate.join(' ')
 
-        const data = { username, joinDate, distance, avatar }
+        const data = { username, joinDate, wholeDistance, avatar }
         recommendedFriends.push(data)
       }
     }
+
     console.log(req.user.username)
     res.render('profile', { userBio, postsArray, recommendedFriends })
     // res.status(200).redirect('/posts/home')
