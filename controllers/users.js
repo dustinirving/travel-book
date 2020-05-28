@@ -100,10 +100,19 @@ router.get('/profile', isAuthenticated, async function (req, res) {
 */
 router.put('/edit/username', isAuthenticated, async function (req, res) {
   try {
-    console.log(req.user)
-    const user = await User.findByPk(req.user.id)
-    const data = { username: req.body.newUsername }
-    await user.update(data)
+    // const user = await User.findByPk(req.user.id)
+    // const data = { username: req.body.newUsername }
+    // await user.update(data)
+    req.user.username = req.body.newUsername
+    await User.update(
+      { username: req.body.newUsername },
+      {
+        where: {
+          id: req.user.id
+        }
+      }
+    )
+
     // Find all posts written by the user
     const postsData = await Post.findAll({
       where: { UserId: req.user.id },
@@ -130,7 +139,7 @@ router.put('/edit/username', isAuthenticated, async function (req, res) {
       lastName: req.user.lastname,
       email: req.user.email,
       phoneNumber: req.user.phonenumber,
-      address: req.user.streetaddress,
+      address: req.user.address,
       joinDate: localDate
     }
 
@@ -182,7 +191,7 @@ router.put('/edit/username', isAuthenticated, async function (req, res) {
         recommendedFriends.push(data)
       }
     }
-
+    console.log(req.user.username)
     res.render('profile', { userBio, postsArray, recommendedFriends })
     // res.status(200).redirect('/posts/home')
   } catch (err) {
