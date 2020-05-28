@@ -13,6 +13,10 @@ video {
   outline: none;
 }
 
+span {
+  text-decoration: underline;
+}
+
 #landing-align h1 {
   font-family: Poppins;
   font-style: normal;
