@@ -12,6 +12,8 @@ const methodOverride = require('method-override')
 // Sets up the Express App
 // =============================================================
 const app = express()
+app.set('trust proxy', true)
+
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
