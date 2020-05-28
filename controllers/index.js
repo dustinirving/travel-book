@@ -45,14 +45,16 @@ router.post(
 */
 const ipConvert = async req => {
   const address =
-    req.ip ||
     req.connection.remoteAddress ||
     req.socket.remoteAddress ||
     (req.connection.socket ? req.connection.socket.remoteAddress : null)
   if (address && address.includes(',')) {
     return iplocate(address.split(',')[0].trim())
   }
-  return await iplocate(address)
+  console.log(address)
+  const geoObject = await iplocate(address)
+  console.log(geoObject)
+  return geoObject
 }
 
 router.post('/signup', async (req, res) => {
