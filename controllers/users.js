@@ -78,12 +78,13 @@ router.get('/profile', isAuthenticated, async function (req, res) {
     for (const user of distanceArray) {
       if (req.user.username !== user.dataValues.username) {
         const { avatar, username, createdAt, distance } = user.dataValues
+        const wholeDistance = Math.round(distance)
         const utcDate = createdAt
         let joinDate = new Date(utcDate).toDateString().split(' ')
         joinDate.splice(0, 1)
         joinDate = joinDate.join(' ')
 
-        const data = { username, joinDate, distance, avatar }
+        const data = { username, joinDate, wholeDistance, avatar }
         recommendedFriends.push(data)
       }
     }
