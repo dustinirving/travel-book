@@ -44,20 +44,9 @@ router.post(
   returns an object of longtitude and latitude coordinates using iplocate
 */
 const ipConvert = async req => {
-  // const address =
-  //   req.connection.remoteAddress ||
-  //   req.socket.remoteAddress ||
-  //   (req.connection.socket ? req.connection.socket.remoteAddress : null)
-  // if (address && address.includes(',')) {
-  //   return iplocate(address.split(',')[0].trim())
-  // }
-  const address = req.ip
-  console.log({
-    'req.ip': req.ip
-  })
-  const geoObject = await iplocate(address)
-  console.log(geoObject)
-  return geoObject
+  // Get the ip address of the user from request object
+  const ipAddress = req.ip
+  return await iplocate(ipAddress)
 }
 
 router.post('/signup', async (req, res) => {
