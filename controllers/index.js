@@ -39,7 +39,6 @@ router.post(
     req.flash('error', 'Invalid password or username.')
   }
 )
-
 /*
   function to check various possibilities for the ip address in the req object
   returns an object of longtitude and latitude coordinates using iplocate
@@ -104,7 +103,7 @@ router.post('/signup', async (req, res) => {
     // otherwise create a new user with username and password in the database
     await User.create({
       username: username,
-      password: username,
+      password: password,
       longitude,
       latitude,
       avatar,

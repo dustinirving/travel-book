@@ -9,13 +9,22 @@ body {
   top: 0vh;
 }
 
+video {
+  outline: none;
+}
+
+span {
+  text-decoration: underline;
+}
+
 #landing-align h1 {
   font-family: Poppins;
   font-style: normal;
-  font-weight: normal;
+  font-weight: bold;
+  color: #008080;
   font-size: 1.8rem;
   line-height: 3rem;
-  color: #000000;
+  /* color: #000000; */
   text-align: left;
   padding-left: 2rem;
   padding-top: 1.5rem;
