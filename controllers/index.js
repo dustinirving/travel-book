@@ -44,17 +44,16 @@ router.post(
   returns an object of longtitude and latitude coordinates using iplocate
 */
 const ipConvert = async req => {
-  const address =
-    req.connection.remoteAddress ||
-    req.socket.remoteAddress ||
-    (req.connection.socket ? req.connection.socket.remoteAddress : null)
-  if (address && address.includes(',')) {
-    return iplocate(address.split(',')[0].trim())
-  }
+  // const address =
+  //   req.connection.remoteAddress ||
+  //   req.socket.remoteAddress ||
+  //   (req.connection.socket ? req.connection.socket.remoteAddress : null)
+  // if (address && address.includes(',')) {
+  //   return iplocate(address.split(',')[0].trim())
+  // }
+  const address = req.ip
   console.log({
-    'req.connection.remoteAddress': req.connection.remoteAddress,
-    'req.socket.remoteAddress': req.socket.remoteAddress,
-    'req.connection.socket': req.connection.socket
+    'req.ip': req.ip
   })
   const geoObject = await iplocate(address)
   console.log(geoObject)
