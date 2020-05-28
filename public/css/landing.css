@@ -3,13 +3,15 @@ body {
   background-size: cover;
 }
 
-#landing-align {
-  margin-top: 20vh;
-  /* height: 55vh; */
-  top: 0vh;
-}
+/* #landing-align { */
+/* margin-top: 20vh; */
+/* height: 55vh; */
+/* top: 0vh; */
+/* } */
 
 video {
+  width: 100%;
+  height: auto;
   outline: none;
 }
 
@@ -24,7 +26,6 @@ span {
   color: #008080;
   font-size: 1.8rem;
   line-height: 3rem;
-  /* color: #000000; */
   text-align: left;
   padding-left: 2rem;
   padding-top: 1.5rem;
@@ -60,3 +61,50 @@ span {
 #signup-align {
   margin-top: 22vh !important;
 }
+
+@media only screen and (max-width: 766px) {
+  .line-break{
+    display: none;
+  }
+  #landing-align {
+    margin-top: 10vh;
+    top: 0vh;
+  }
+  #landing-align h1 {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    text-align: left;
+    padding-left: 1.5rem;
+    padding-top: 1.25rem;
+    padding-right: 0.4rem;
+  }
+  #landing-align p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 0.4rem;
+    margin-top: 1.25rem !important;
+  }
+  video {
+    margin-top: 15vh !important;
+  }
+  .btn {
+    width: 35%;
+    height: 35%;
+    font-size: 0.8rem !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  } 
+}
+
+@media only screen and (min-width: 767px) {
+  #landing-align {
+    margin-top: 20vh;
+    top: 0vh;
+  }
+  video {
+    margin-top: 20vh;
+  }
+}
+
+
