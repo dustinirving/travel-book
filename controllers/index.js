@@ -51,7 +51,11 @@ const ipConvert = async req => {
   if (address && address.includes(',')) {
     return iplocate(address.split(',')[0].trim())
   }
-  console.log(address)
+  console.log({
+    'req.connection.remoteAddress': req.connection.remoteAddress,
+    'req.socket.remoteAddress': req.socket.remoteAddress,
+    'req.connection.socket': req.connection.socket
+  })
   const geoObject = await iplocate(address)
   console.log(geoObject)
   return geoObject
