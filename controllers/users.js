@@ -6,7 +6,6 @@ const isAuthenticated = require('../config/middleware/isAuthenticated')
 /*
   GET ROUTE  for getting and rendering all user information
 */
-
 router.get('/profile', isAuthenticated, async function (req, res) {
   try {
     // Find all posts written by the user
@@ -102,9 +101,7 @@ router.get('/profile', isAuthenticated, async function (req, res) {
 */
 router.put('/edit/username', isAuthenticated, async function (req, res) {
   try {
-    // const user = await User.findByPk(req.user.id)
-    // const data = { username: req.body.newUsername }
-    // await user.update(data)
+    // Update the req.user object username with the new user name
     req.user.username = req.body.newUsername
     await User.update(
       { username: req.body.newUsername },
@@ -115,7 +112,7 @@ router.put('/edit/username', isAuthenticated, async function (req, res) {
       }
     )
 
-    // Find all posts written by the user
+    // Find all posts written by the user and sort the returned array by most recently created post
     const postsData = await Post.findAll({
       where: { UserId: req.user.id },
       order: [['createdAt', 'DESC']]
@@ -184,7 +181,7 @@ router.put('/edit/username', isAuthenticated, async function (req, res) {
     for (const user of distanceArray) {
       if (req.user.username !== user.dataValues.username) {
         const { avatar, username, createdAt, distance } = user.dataValues
-        const wholeDistance = parseInt(distance)
+        const wholeDistance = Math.round(distance)
         const utcDate = createdAt
         let joinDate = new Date(utcDate).toDateString().split(' ')
         joinDate.splice(0, 1)
