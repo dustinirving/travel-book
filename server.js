@@ -13,6 +13,7 @@ const compression = require('compression')
 // Sets up the Express App
 // =============================================================
 const app = express()
+app.use(compression())
 app.set('trust proxy', true)
 
 // Sets up the Express app to handle data parsing
@@ -20,7 +21,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 // Method override used for put request in the form
 app.use(methodOverride('_method'))
-app.use(compression)
 
 // Middleware for uploading images
 app.use(
