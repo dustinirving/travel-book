@@ -8,6 +8,7 @@ const flash = require('connect-flash')
 const path = require('path')
 const fileUpload = require('express-fileupload')
 const methodOverride = require('method-override')
+const compression = require('compression')
 
 // Sets up the Express App
 // =============================================================
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 // Method override used for put request in the form
 app.use(methodOverride('_method'))
+app.use(compression)
 
 // Middleware for uploading images
 app.use(
