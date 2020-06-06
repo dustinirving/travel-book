@@ -8,10 +8,12 @@ const flash = require('connect-flash')
 const path = require('path')
 const fileUpload = require('express-fileupload')
 const methodOverride = require('method-override')
+const compression = require('compression')
 
 // Sets up the Express App
 // =============================================================
 const app = express()
+app.use(compression())
 app.set('trust proxy', true)
 
 // Sets up the Express app to handle data parsing
