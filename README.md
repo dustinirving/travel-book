@@ -6,7 +6,7 @@
 A social media platform for sharing travel experiences with other `travel book` users. Users will need to create an account and sign in to share or view other users travel profile pages. A user can view all posts, add new travel posts, update and delete their own posts, view their own profile. The user's profile displays the users information, own posts, recommended friends, allows the user to update personal settings.
 
 ### Deployed Site
-> https://thetravelbook.herokuapp.com/
+> https://www.travel-book.ca
 
 ### Demo
 > Coming soon...
