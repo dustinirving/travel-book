@@ -8,6 +8,7 @@ const flash = require('connect-flash')
 const path = require('path')
 const fileUpload = require('express-fileupload')
 const methodOverride = require('method-override')
+const compression = require('compression')
 
 // Sets up the Express App
 // =============================================================
@@ -54,7 +55,7 @@ app.use((req, res, next) => {
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(compression())
 // Routes Handler
 // ================================================
 app.use('/posts', require('./controllers/posts'))
@@ -65,7 +66,7 @@ app.get('*', (req, res) => {
 })
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`))
 })
