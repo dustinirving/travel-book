@@ -13,6 +13,22 @@ const compression = require('compression')
 // Sets up the Express App
 // =============================================================
 const app = express()
+// Ensure all traffic is passed through secure protocol only in production
+if (process.env.NODE_ENV === 'production') {
+  // Re-direct all unsecure traffic through the https protocol
+  const requireHTTPS = (req, res, next) => {
+    // The 'x-forwarded-proto' check is for Heroku
+    if (
+      !req.secure &&
+      req.get('x-forwarded-proto') !== 'https' &&
+      process.env.NODE_ENV !== 'development'
+    ) {
+      return res.redirect('https://' + req.get('host') + req.url)
+    }
+    next()
+  }
+  app.use(requireHTTPS)
+}
 app.use(compression())
 app.set('trust proxy', true)
 
@@ -56,7 +72,7 @@ app.use((req, res, next) => {
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(compression())
 // Routes Handler
 // ================================================
 app.use('/posts', require('./controllers/posts'))
