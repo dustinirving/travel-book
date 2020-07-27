@@ -2,7 +2,7 @@
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/dustinirving/travel-book) ![Contributors](https://img.shields.io/github/contributors/dustinirving/travel-book) ![Last Commit](https://img.shields.io/github/last-commit/dustinirving/travel-book) [![Build Status](https://travis-ci.com/dustinirving/travel-book.svg?branch=master)](https://travis-ci.com/dustinirving/travel-book) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A social media platform for sharing travel experiences with other `travel book` users. Users will need to create an account and sign in to share or view other users travel profile pages. A user can view all posts, add new travel posts, update and delete their own posts, view their own profile. The user's profile displays the users information, own posts, recommended friends, allows the user to update personal settings.
+A social media platform for sharing travel experiences with other `travelbook` users. Users will need to create an account and sign in to share or view other users travel profile pages. A user can view all posts, add new travel posts, update and delete their own posts, view their own profile. The user's profile displays the users information, own posts, recommended friends, allows the user to update personal settings.
 
 ### Deployed Site
 
@@ -10,11 +10,13 @@ A social media platform for sharing travel experiences with other `travel book` 
 
 ### Demo
 
-> Coming soon...
+> <a href="" target="_blank">
+<img src="https://lh3.googleusercontent.com/d/13EEnhBZcCUc4kCqyLbhWRcMIVB9ejm57=s720?authuser=0" alt="travelbook demo" width="546px" height="356px" /></a>
+
 
 ### Tech Stack
 
-Semantic UI / EJS / Node.js / Express / Sequelize / MySQL
+    Javascript / EJS / Node.js / Express /  Semantic UI / Sequelize / MySQL
 
 ## Installation
 
