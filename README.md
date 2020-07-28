@@ -10,8 +10,8 @@ A social media platform for sharing travel experiences with other `travelbook` u
 
 ### Demo
 
-> <a href="" target="_blank">
-<img src="https://lh3.googleusercontent.com/d/13EEnhBZcCUc4kCqyLbhWRcMIVB9ejm57=s720?authuser=0" alt="travelbook demo" width="546px" height="356px" /></a>
+![travelbook-demo](/resources/travelbook.gif)
+
 
 
 ### Tech Stack
